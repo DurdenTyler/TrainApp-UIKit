@@ -1,0 +1,487 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DD408DE527FC22BC00028D33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD408DE427FC22BC00028D33 /* AppDelegate.swift */; };
+		DD408DE727FC22BC00028D33 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD408DE627FC22BC00028D33 /* SceneDelegate.swift */; };
+		DD408DE927FC22BC00028D33 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD408DE827FC22BC00028D33 /* MainViewController.swift */; };
+		DD408DEE27FC22BC00028D33 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD408DED27FC22BC00028D33 /* Assets.xcassets */; };
+		DD408DF127FC22BC00028D33 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD408DEF27FC22BC00028D33 /* LaunchScreen.storyboard */; };
+		DD408DFF27FDE81F00028D33 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD408DFE27FDE81F00028D33 /* CalendarView.swift */; };
+		DD408E0127FED43400028D33 /* AddWorkoutButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD408E0027FED43400028D33 /* AddWorkoutButton.swift */; };
+		DD408E0527FED9AF00028D33 /* WhatWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD408E0427FED9AF00028D33 /* WhatWeather.swift */; };
+		DD48008C280432F200314DA6 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD48008A280432F200314DA6 /* Roboto-Bold.ttf */; };
+		DD48008D280432F200314DA6 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD48008B280432F200314DA6 /* Roboto-Medium.ttf */; };
+		DD48008F2804353300314DA6 /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48008E2804353300314DA6 /* UIView + Extensions.swift */; };
+		DD48009228057BE200314DA6 /* CalendarCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48009128057BE200314DA6 /* CalendarCollectionCell.swift */; };
+		DDD5835D2806AEE5006F26CE /* WorkoutTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5835C2806AEE5006F26CE /* WorkoutTableCell.swift */; };
+		DDD5835F28070B95006F26CE /* UIStackView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5835E28070B95006F26CE /* UIStackView + Extension.swift */; };
+		DDD5836128086004006F26CE /* StaticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5836028086004006F26CE /* StaticViewController.swift */; };
+		DDD58365280873F6006F26CE /* StaticTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD58364280873F6006F26CE /* StaticTableCell.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DD408DE127FC22BC00028D33 /* TrainApp1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrainApp1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD408DE427FC22BC00028D33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		DD408DE627FC22BC00028D33 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		DD408DE827FC22BC00028D33 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		DD408DED27FC22BC00028D33 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DD408DF027FC22BC00028D33 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DD408DF227FC22BC00028D33 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD408DFE27FDE81F00028D33 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		DD408E0027FED43400028D33 /* AddWorkoutButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutButton.swift; sourceTree = "<group>"; };
+		DD408E0427FED9AF00028D33 /* WhatWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatWeather.swift; sourceTree = "<group>"; };
+		DD48008A280432F200314DA6 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		DD48008B280432F200314DA6 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		DD48008E2804353300314DA6 /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
+		DD48009128057BE200314DA6 /* CalendarCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionCell.swift; sourceTree = "<group>"; };
+		DDD5835C2806AEE5006F26CE /* WorkoutTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableCell.swift; sourceTree = "<group>"; };
+		DDD5835E28070B95006F26CE /* UIStackView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extension.swift"; sourceTree = "<group>"; };
+		DDD5836028086004006F26CE /* StaticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticViewController.swift; sourceTree = "<group>"; };
+		DDD58364280873F6006F26CE /* StaticTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTableCell.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DD408DDE27FC22BC00028D33 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DD408DD827FC22BC00028D33 = {
+			isa = PBXGroup;
+			children = (
+				DD408DE327FC22BC00028D33 /* TrainApp1 */,
+				DD408DE227FC22BC00028D33 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DD408DE227FC22BC00028D33 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DD408DE127FC22BC00028D33 /* TrainApp1.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DD408DE327FC22BC00028D33 /* TrainApp1 */ = {
+			isa = PBXGroup;
+			children = (
+				DD408DF827FD7D0B00028D33 /* Application */,
+				DD408DF927FD7D1B00028D33 /* Models */,
+				DD408DFA27FD7D2100028D33 /* Views */,
+				DD408DFB27FD7D2700028D33 /* Controllers */,
+				DD4800872804322000314DA6 /* Extensions */,
+				DD408DFC27FD7D6200028D33 /* Resourses */,
+			);
+			path = TrainApp1;
+			sourceTree = "<group>";
+		};
+		DD408DF827FD7D0B00028D33 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				DD408DE427FC22BC00028D33 /* AppDelegate.swift */,
+				DD408DE627FC22BC00028D33 /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		DD408DF927FD7D1B00028D33 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DD408DFA27FD7D2100028D33 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DDD58362280873C8006F26CE /* StaticVC */,
+				DD408DFD27FDE7E700028D33 /* MainVC */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DD408DFB27FD7D2700028D33 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DD408DE827FC22BC00028D33 /* MainViewController.swift */,
+				DDD5836028086004006F26CE /* StaticViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		DD408DFC27FD7D6200028D33 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				DD4800892804329800314DA6 /* Fonts */,
+				DD408DED27FC22BC00028D33 /* Assets.xcassets */,
+				DD408DEF27FC22BC00028D33 /* LaunchScreen.storyboard */,
+				DD408DF227FC22BC00028D33 /* Info.plist */,
+			);
+			path = Resourses;
+			sourceTree = "<group>";
+		};
+		DD408DFD27FDE7E700028D33 /* MainVC */ = {
+			isa = PBXGroup;
+			children = (
+				DD48009028057BC800314DA6 /* Cells */,
+				DD408DFE27FDE81F00028D33 /* CalendarView.swift */,
+				DD408E0027FED43400028D33 /* AddWorkoutButton.swift */,
+				DD408E0427FED9AF00028D33 /* WhatWeather.swift */,
+			);
+			path = MainVC;
+			sourceTree = "<group>";
+		};
+		DD4800872804322000314DA6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DD48008E2804353300314DA6 /* UIView + Extensions.swift */,
+				DDD5835E28070B95006F26CE /* UIStackView + Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		DD4800892804329800314DA6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DD48008A280432F200314DA6 /* Roboto-Bold.ttf */,
+				DD48008B280432F200314DA6 /* Roboto-Medium.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		DD48009028057BC800314DA6 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				DD48009128057BE200314DA6 /* CalendarCollectionCell.swift */,
+				DDD5835C2806AEE5006F26CE /* WorkoutTableCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		DDD58362280873C8006F26CE /* StaticVC */ = {
+			isa = PBXGroup;
+			children = (
+				DDD58363280873D9006F26CE /* Cell */,
+			);
+			path = StaticVC;
+			sourceTree = "<group>";
+		};
+		DDD58363280873D9006F26CE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DDD58364280873F6006F26CE /* StaticTableCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DD408DE027FC22BC00028D33 /* TrainApp1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD408DF527FC22BC00028D33 /* Build configuration list for PBXNativeTarget "TrainApp1" */;
+			buildPhases = (
+				DD408DDD27FC22BC00028D33 /* Sources */,
+				DD408DDE27FC22BC00028D33 /* Frameworks */,
+				DD408DDF27FC22BC00028D33 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TrainApp1;
+			productName = TrainApp1;
+			productReference = DD408DE127FC22BC00028D33 /* TrainApp1.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DD408DD927FC22BC00028D33 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					DD408DE027FC22BC00028D33 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = DD408DDC27FC22BC00028D33 /* Build configuration list for PBXProject "TrainApp1" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DD408DD827FC22BC00028D33;
+			productRefGroup = DD408DE227FC22BC00028D33 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DD408DE027FC22BC00028D33 /* TrainApp1 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DD408DDF27FC22BC00028D33 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD48008D280432F200314DA6 /* Roboto-Medium.ttf in Resources */,
+				DD408DF127FC22BC00028D33 /* LaunchScreen.storyboard in Resources */,
+				DD408DEE27FC22BC00028D33 /* Assets.xcassets in Resources */,
+				DD48008C280432F200314DA6 /* Roboto-Bold.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DD408DDD27FC22BC00028D33 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD408DE927FC22BC00028D33 /* MainViewController.swift in Sources */,
+				DD48009228057BE200314DA6 /* CalendarCollectionCell.swift in Sources */,
+				DDD5836128086004006F26CE /* StaticViewController.swift in Sources */,
+				DD408DE527FC22BC00028D33 /* AppDelegate.swift in Sources */,
+				DDD5835F28070B95006F26CE /* UIStackView + Extension.swift in Sources */,
+				DD408E0527FED9AF00028D33 /* WhatWeather.swift in Sources */,
+				DD408DFF27FDE81F00028D33 /* CalendarView.swift in Sources */,
+				DD408DE727FC22BC00028D33 /* SceneDelegate.swift in Sources */,
+				DDD58365280873F6006F26CE /* StaticTableCell.swift in Sources */,
+				DD48008F2804353300314DA6 /* UIView + Extensions.swift in Sources */,
+				DDD5835D2806AEE5006F26CE /* WorkoutTableCell.swift in Sources */,
+				DD408E0127FED43400028D33 /* AddWorkoutButton.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DD408DEF27FC22BC00028D33 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DD408DF027FC22BC00028D33 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DD408DF327FC22BC00028D33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		DD408DF427FC22BC00028D33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DD408DF627FC22BC00028D33 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U887Z457SC;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrainApp1/Resourses/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = IvanChuv.TrainApp1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		DD408DF727FC22BC00028D33 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = U887Z457SC;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrainApp1/Resourses/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = IvanChuv.TrainApp1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DD408DDC27FC22BC00028D33 /* Build configuration list for PBXProject "TrainApp1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD408DF327FC22BC00028D33 /* Debug */,
+				DD408DF427FC22BC00028D33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD408DF527FC22BC00028D33 /* Build configuration list for PBXNativeTarget "TrainApp1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD408DF627FC22BC00028D33 /* Debug */,
+				DD408DF727FC22BC00028D33 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DD408DD927FC22BC00028D33 /* Project object */;
+}
