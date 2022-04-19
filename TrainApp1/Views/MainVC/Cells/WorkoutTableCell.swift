@@ -34,34 +34,13 @@ class WorkoutTableCell:UITableViewCell {
         return image
     }()
     
-    private let labelOne:UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Roboto-Medium", size: 21)
-        label.textColor = .white
-        label.text = "Отжимания"
-        return label
-    }()
     
-    private let labelTwo:UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Roboto-Medium", size: 15)
-        label.textColor = .white
-        label.text = "Повторений: 10"
-        label.layer.opacity = 0.8
-        return label
-    }()
+    private let labelOne = UILabel(text: "Отжимания", fontName: "Roboto-Medium", fontSize: 21, textColor: .white, opacity: 1)
     
-    private let labelThree:UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Roboto-Medium", size: 15)
-        label.textColor = .white
-        label.text = "Подходов: 4"
-        label.layer.opacity = 0.8
-        return label
-    }()
+    private let labelTwo = UILabel(text: "Повторений: 10", fontName: "Roboto-Medium", fontSize: 15, textColor: .white, opacity: 0.8)
+    
+    private let labelThree = UILabel(text: "Подходов: 4", fontName: "Roboto-Medium", fontSize: 15, textColor: .white, opacity: 0.8)
+    
     
     private let workoutButton:UIButton = {
         let button = UIButton(type: .system)
@@ -108,6 +87,7 @@ class WorkoutTableCell:UITableViewCell {
     
 }
 
+// MARK: - setContrains
 extension WorkoutTableCell {
     private func setContrains() {
         NSLayoutConstraint.activate([

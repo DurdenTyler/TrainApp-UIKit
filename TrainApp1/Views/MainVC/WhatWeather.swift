@@ -9,14 +9,7 @@ import UIKit
 
 class WhatWeather:UIView{
     
-    private let weatherLabel:UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Солнечно"
-        label.font = UIFont(name: "Roboto-Bold", size: 23)
-        label.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        return label
-    }()
+    private let weatherLabel = UILabel(text: "Солнечно", fontName: "Roboto-Bold", fontSize: 23, textColor: .white, opacity: 1)
     
     private let weatherLabel2:UILabel = {
         let label = UILabel()
@@ -60,6 +53,7 @@ class WhatWeather:UIView{
     
 }
 
+// MARK: - setContrains
 extension WhatWeather {
     private func setContrains() {
         NSLayoutConstraint.activate([

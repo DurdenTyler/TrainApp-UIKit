@@ -19,8 +19,14 @@
 		DD48008D280432F200314DA6 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD48008B280432F200314DA6 /* Roboto-Medium.ttf */; };
 		DD48008F2804353300314DA6 /* UIView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48008E2804353300314DA6 /* UIView + Extensions.swift */; };
 		DD48009228057BE200314DA6 /* CalendarCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD48009128057BE200314DA6 /* CalendarCollectionCell.swift */; };
+		DD86EF3E280DCFAA0035AB30 /* DateAndRepeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86EF3D280DCFAA0035AB30 /* DateAndRepeatView.swift */; };
+		DD86EF40280DCFBC0035AB30 /* RepsOrTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD86EF3F280DCFBC0035AB30 /* RepsOrTimerView.swift */; };
+		DDC858D3280924CA008B0EB4 /* UILabel + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC858D2280924CA008B0EB4 /* UILabel + Extensions.swift */; };
+		DDC858D728094508008B0EB4 /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC858D628094508008B0EB4 /* UIColor + Extensions.swift */; };
+		DDC858D9280D6349008B0EB4 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC858D8280D6349008B0EB4 /* MainTabBarController.swift */; };
+		DDC858DB280D7BA5008B0EB4 /* NewWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC858DA280D7BA5008B0EB4 /* NewWorkoutViewController.swift */; };
 		DDD5835D2806AEE5006F26CE /* WorkoutTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5835C2806AEE5006F26CE /* WorkoutTableCell.swift */; };
-		DDD5835F28070B95006F26CE /* UIStackView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5835E28070B95006F26CE /* UIStackView + Extension.swift */; };
+		DDD5835F28070B95006F26CE /* UIStackView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5835E28070B95006F26CE /* UIStackView + Extensions.swift */; };
 		DDD5836128086004006F26CE /* StaticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5836028086004006F26CE /* StaticViewController.swift */; };
 		DDD58365280873F6006F26CE /* StaticTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD58364280873F6006F26CE /* StaticTableCell.swift */; };
 /* End PBXBuildFile section */
@@ -40,8 +46,14 @@
 		DD48008B280432F200314DA6 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		DD48008E2804353300314DA6 /* UIView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extensions.swift"; sourceTree = "<group>"; };
 		DD48009128057BE200314DA6 /* CalendarCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionCell.swift; sourceTree = "<group>"; };
+		DD86EF3D280DCFAA0035AB30 /* DateAndRepeatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateAndRepeatView.swift; sourceTree = "<group>"; };
+		DD86EF3F280DCFBC0035AB30 /* RepsOrTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsOrTimerView.swift; sourceTree = "<group>"; };
+		DDC858D2280924CA008B0EB4 /* UILabel + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extensions.swift"; sourceTree = "<group>"; };
+		DDC858D628094508008B0EB4 /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
+		DDC858D8280D6349008B0EB4 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		DDC858DA280D7BA5008B0EB4 /* NewWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkoutViewController.swift; sourceTree = "<group>"; };
 		DDD5835C2806AEE5006F26CE /* WorkoutTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTableCell.swift; sourceTree = "<group>"; };
-		DDD5835E28070B95006F26CE /* UIStackView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extension.swift"; sourceTree = "<group>"; };
+		DDD5835E28070B95006F26CE /* UIStackView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extensions.swift"; sourceTree = "<group>"; };
 		DDD5836028086004006F26CE /* StaticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticViewController.swift; sourceTree = "<group>"; };
 		DDD58364280873F6006F26CE /* StaticTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTableCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,8 +117,9 @@
 		DD408DFA27FD7D2100028D33 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				DDD58362280873C8006F26CE /* StaticVC */,
 				DD408DFD27FDE7E700028D33 /* MainVC */,
+				DDD58362280873C8006F26CE /* StaticVC */,
+				DD86EF3C280DCF390035AB30 /* NewWorkoutVC */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -114,8 +127,10 @@
 		DD408DFB27FD7D2700028D33 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DDC858D8280D6349008B0EB4 /* MainTabBarController.swift */,
 				DD408DE827FC22BC00028D33 /* MainViewController.swift */,
 				DDD5836028086004006F26CE /* StaticViewController.swift */,
+				DDC858DA280D7BA5008B0EB4 /* NewWorkoutViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -146,7 +161,9 @@
 			isa = PBXGroup;
 			children = (
 				DD48008E2804353300314DA6 /* UIView + Extensions.swift */,
-				DDD5835E28070B95006F26CE /* UIStackView + Extension.swift */,
+				DDD5835E28070B95006F26CE /* UIStackView + Extensions.swift */,
+				DDC858D2280924CA008B0EB4 /* UILabel + Extensions.swift */,
+				DDC858D628094508008B0EB4 /* UIColor + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -167,6 +184,15 @@
 				DDD5835C2806AEE5006F26CE /* WorkoutTableCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		DD86EF3C280DCF390035AB30 /* NewWorkoutVC */ = {
+			isa = PBXGroup;
+			children = (
+				DD86EF3D280DCFAA0035AB30 /* DateAndRepeatView.swift */,
+				DD86EF3F280DCFBC0035AB30 /* RepsOrTimerView.swift */,
+			);
+			path = NewWorkoutVC;
 			sourceTree = "<group>";
 		};
 		DDD58362280873C8006F26CE /* StaticVC */ = {
@@ -259,16 +285,22 @@
 			files = (
 				DD408DE927FC22BC00028D33 /* MainViewController.swift in Sources */,
 				DD48009228057BE200314DA6 /* CalendarCollectionCell.swift in Sources */,
+				DDC858D9280D6349008B0EB4 /* MainTabBarController.swift in Sources */,
 				DDD5836128086004006F26CE /* StaticViewController.swift in Sources */,
 				DD408DE527FC22BC00028D33 /* AppDelegate.swift in Sources */,
-				DDD5835F28070B95006F26CE /* UIStackView + Extension.swift in Sources */,
+				DDD5835F28070B95006F26CE /* UIStackView + Extensions.swift in Sources */,
+				DD86EF40280DCFBC0035AB30 /* RepsOrTimerView.swift in Sources */,
 				DD408E0527FED9AF00028D33 /* WhatWeather.swift in Sources */,
+				DDC858D728094508008B0EB4 /* UIColor + Extensions.swift in Sources */,
+				DDC858D3280924CA008B0EB4 /* UILabel + Extensions.swift in Sources */,
 				DD408DFF27FDE81F00028D33 /* CalendarView.swift in Sources */,
 				DD408DE727FC22BC00028D33 /* SceneDelegate.swift in Sources */,
 				DDD58365280873F6006F26CE /* StaticTableCell.swift in Sources */,
 				DD48008F2804353300314DA6 /* UIView + Extensions.swift in Sources */,
+				DDC858DB280D7BA5008B0EB4 /* NewWorkoutViewController.swift in Sources */,
 				DDD5835D2806AEE5006F26CE /* WorkoutTableCell.swift in Sources */,
 				DD408E0127FED43400028D33 /* AddWorkoutButton.swift in Sources */,
+				DD86EF3E280DCFAA0035AB30 /* DateAndRepeatView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

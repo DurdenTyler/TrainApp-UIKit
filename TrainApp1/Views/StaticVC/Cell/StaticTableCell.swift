@@ -9,43 +9,13 @@ import UIKit
 
 class StaticTableCell:UITableViewCell {
     
-    private let labelMain:UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Roboto-Medium", size: 26)
-        label.textColor = .white
-        label.text = "Отжимания"
-        return label
-    }()
+    private let labelMain = UILabel(text: "Отжимания", fontName: "Roboto-Medium", fontSize: 26, textColor: .white, opacity: 1)
     
-    private let labelTwo:UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Roboto-Medium", size: 14)
-        label.textColor = .white
-        label.text = "Раньше: 10"
-        label.layer.opacity = 0.7
-        return label
-    }()
+    private let labelTwo = UILabel(text: "Раньше: 2", fontName: "Roboto-Medium", fontSize: 14, textColor: .white, opacity: 0.8)
     
-    private let labelThree:UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Roboto-Medium", size: 14)
-        label.textColor = .white
-        label.text = "Сейчас: 4"
-        label.layer.opacity = 0.8
-        return label
-    }()
+    private let labelThree = UILabel(text: "Сейчас: 4", fontName: "Roboto-Medium", fontSize: 14, textColor: .white, opacity: 0.8)
     
-    private let labelNumber:UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "Roboto-Medium", size: 30)
-        label.textColor = #colorLiteral(red: 0.9490196078, green: 0.9294117647, blue: 0, alpha: 1)
-        label.text = "+2"
-        return label
-    }()
+    private let labelNumber = UILabel(text: "+2", fontName: "Roboto-Medium", fontSize: 30, textColor: .specialYellow, opacity: 1)
     
     private let backView:UIView = {
         let view = UIView()
@@ -81,6 +51,7 @@ class StaticTableCell:UITableViewCell {
     
 }
 
+// MARK: - setContrains
 extension StaticTableCell {
     private func setContrains() {
         NSLayoutConstraint.activate([

@@ -9,38 +9,25 @@ import UIKit
 
 class StaticViewController: UIViewController {
     
-    private let staticsLabel:UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Статистика"
-        label.textColor = #colorLiteral(red: 0.1254901961, green: 0.3764705882, blue: 0.6941176471, alpha: 1)
-        label.font = UIFont(name: "Roboto-Medium", size: 28)
-        return label
-    }()
+    private let staticsLabel = UILabel(text: "Статистика", fontName: "Roboto-Medium", fontSize: 28, textColor: .specialDarkBlue, opacity: 1)
     
     private let segControl:UISegmentedControl = {
         let titles = ["Неделя", "Месяц"]
         let seg = UISegmentedControl(items: titles)
-        let color : UIColor = UIColor.white
-        let attributes = [
-            NSAttributedString.Key.foregroundColor : color,
-            ]
         seg.translatesAutoresizingMaskIntoConstraints = false
         seg.selectedSegmentIndex = 0
-        seg.selectedSegmentTintColor = #colorLiteral(red: 0.1254901961, green: 0.3764705882, blue: 0.6941176471, alpha: 1)
-        seg.setTitleTextAttributes(attributes, for: .selected)
+        
+        seg.backgroundColor = .specialDarkBlue
+        seg.selectedSegmentTintColor = .specialYellow
+        
+        seg.setTitleTextAttributes([.foregroundColor : UIColor.specialDarkBlue], for: .selected)
+        seg.setTitleTextAttributes([.foregroundColor : UIColor.white], for: .normal)
+        
+        seg.addTarget(self, action: #selector(segmentChange), for: .valueChanged)
         return seg
     }()
     
-    private let exercicesLabel:UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Упражнения"
-        label.textColor = #colorLiteral(red: 0.1254901961, green: 0.3764705882, blue: 0.6941176471, alpha: 1)
-        label.font = UIFont(name: "Roboto-Medium", size: 16)
-        label.layer.opacity = 0.7
-        return label
-    }()
+    private let exercicesLabel = UILabel(text: "Упражнения",textColor: .specialDarkBlue, opacity: 0.7)
     
     private let tableStaticView:UITableView = {
         let table = UITableView()
@@ -79,8 +66,17 @@ class StaticViewController: UIViewController {
         tableStaticView.delegate = self
     }
     
+    @objc private func segmentChange() {
+        if segControl.selectedSegmentIndex == 0 {
+            print("0")
+        }else {
+            print("1")
+        }
+    }
+    
 }
 
+// MARK: - setContrains
 extension StaticViewController {
     private func setContrains() {
         NSLayoutConstraint.activate([
@@ -115,8 +111,8 @@ extension StaticViewController:UITableViewDataSource {
         5
     }
     
-    func tableView(_ tableStaticView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableStaticView.dequeueReusableCell(withIdentifier: idStaticTableViewCell, for: indexPath) as?
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: idStaticTableViewCell, for: indexPath) as?
                 StaticTableCell else {
                     return UITableViewCell()
                 }
@@ -126,7 +122,7 @@ extension StaticViewController:UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension StaticViewController:UITableViewDelegate {
-    func tableView(_ tableStaticView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         85
     }
     }

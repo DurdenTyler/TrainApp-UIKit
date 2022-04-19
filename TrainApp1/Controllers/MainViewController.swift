@@ -18,26 +18,9 @@ class MainViewController: UIViewController {
         return imageView
     }()
     
-    private let workoutTodayLabel:UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = #colorLiteral(red: 0.1254901961, green: 0.3764705882, blue: 0.6941176471, alpha: 1)
-        label.text = "Сегодняшняя тренировка"
-        label.font = UIFont(name: "Roboto-Medium", size: 17)
-        label.layer.opacity = 0.7
-        
-        return label
-    }()
+    private let workoutTodayLabel = UILabel(text: "Сегодняшняя тренировка", textColor: .specialDarkBlue, opacity: 0.7)
     
-    private let userNameLabel:UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Your Name"
-        label.font = UIFont(name: "Roboto-Medium", size: 20)
-        label.adjustsFontSizeToFitWidth = true
-        label.textColor = #colorLiteral(red: 0.1254901961, green: 0.3764705882, blue: 0.6941176471, alpha: 1)
-        return label
-    }()
+    private let userNameLabel = UILabel(text: "Your Name", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
     
     /// Создаем таблицу
     private let tableView:UITableView = {
@@ -88,6 +71,7 @@ class MainViewController: UIViewController {
         view.addSubview(workoutTodayLabel)
         view.addSubview(tableView)
         tableView.register(WorkoutTableCell.self, forCellReuseIdentifier: idWorkoutTableViewCell)
+        addWorkoutButton.addTarget(self, action: #selector(addWorkoutButtonTapped), for: .touchUpInside)
     }
     
     private func setDelegates() {
@@ -95,8 +79,15 @@ class MainViewController: UIViewController {
         tableView.delegate = self
     }
     
+    @objc private func addWorkoutButtonTapped() {
+        let newWorkoutViewController = NewWorkoutViewController()
+        newWorkoutViewController.modalPresentationStyle = .fullScreen /// Выбираем на весь экран или как модальное окно
+        present(newWorkoutViewController, animated: true)
+    }
+    
 }
 
+// MARK: - setContrains
 extension MainViewController {
     private func setContrains() {
 

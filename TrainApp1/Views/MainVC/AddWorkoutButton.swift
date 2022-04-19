@@ -10,13 +10,8 @@ import UIKit
 
 class AddWorkoutButton:UIButton {
     
-    convenience init() {
-        self.init(type: .system)
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupViews()
         setContrains()
     }
@@ -54,7 +49,7 @@ class AddWorkoutButton:UIButton {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setupViews() {
@@ -62,17 +57,13 @@ class AddWorkoutButton:UIButton {
         self.backgroundColor = #colorLiteral(red: 0.9490196078, green: 0.9294117647, blue: 0, alpha: 1)
         self.layer.cornerRadius = 10
         self.addShadowOnView() /// расширение что добавляет тень которое мы написали сами
-        self.addTarget(self, action: #selector(addWorkoutButtonTapped), for: .touchUpInside)
         self.addSubview(addWorkoutImage)
         self.addSubview(addWorkoutLabel)
     }
     
-    @objc private func addWorkoutButtonTapped() {
-        print("addWorkoutButtonTapped is working...")
-    }
-    
 }
 
+// MARK: - setContrains
 extension AddWorkoutButton {
     private func setContrains() {
         NSLayoutConstraint.activate([
