@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 
 class DateAndRepeatView:UIView {
@@ -67,6 +68,14 @@ class DateAndRepeatView:UIView {
         stackView.addArrangedSubview(datePicker)
         stackView2.addArrangedSubview(repLabel)
         stackView2.addArrangedSubview(switchRep)
+    }
+    
+    private func getDateAndRepeat() -> (Date, Bool) {
+        (datePicker.date, switchRep.isOn)
+    }
+    
+    public func setDateAndRepeat() -> (Date, Bool) {
+        getDateAndRepeat()
     }
 }
 

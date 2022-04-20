@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class NewWorkoutViewController: UIViewController {
     
@@ -37,6 +38,10 @@ class NewWorkoutViewController: UIViewController {
     private let timerLabel = UILabel(text: "Повторения или время", fontSize: 12, textColor: .specialYellow, opacity: 0.7)
     
     private let repsOrTimer = RepsOrTimerView()
+    
+    private let localRealm = try! Realm()
+    
+    private var workoutModel = WorkoutModel()
     
     private let saveButton:UIButton = {
         let button = UIButton(type: .system)
@@ -87,7 +92,23 @@ class NewWorkoutViewController: UIViewController {
     }
     
     @objc private func saveFuncButton() {
-        print("Save")
+        setModel()
+        RealmManager.shared.saveWorkoutModel(model: workoutModel)
+        workoutModel = WorkoutModel()
+    }
+    
+    private func setModel() {
+        guard let nameWorkout = nameTextField.text else { return }
+        workoutModel.workoutName = nameWorkout
+        
+        let dateFromPicker = dateAndRepeatView.setDateAndRepeat().0
+        workoutModel.workoutDate = dateFromPicker
+        workoutModel.workoutNumberOfDay = dateFromPicker.getWeekdayNumber()
+        
+        workoutModel.workoutRepeat = dateAndRepeatView.setDateAndRepeat().1
+        workoutModel.workoutSets = repsOrTimer.setDateAndRepeat().0
+        workoutModel.workoutReps = repsOrTimer.setDateAndRepeat().1
+        workoutModel.workoutTimer = repsOrTimer.setDateAndRepeat().2
     }
     
 }

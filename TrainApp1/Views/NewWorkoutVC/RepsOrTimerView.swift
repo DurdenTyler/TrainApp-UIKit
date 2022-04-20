@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class RepsOrTimerView:UIView {
     
     private let setsLabel = UILabel(text: "Подходы", fontName: "Roboto-Medium", fontSize: 23, textColor: .specialDarkBlue, opacity: 1)
     
-    private let countOfSetsLabel = UILabel(text: "4", fontName: "Roboto-Medium", fontSize: 23, textColor: .specialDarkBlue, opacity: 1)
+    private let countOfSetsLabel = UILabel(text: "1", fontName: "Roboto-Medium", fontSize: 23, textColor: .specialDarkBlue, opacity: 1)
     
     private let stackView:UIStackView = {
         let stack = UIStackView()
@@ -24,11 +25,11 @@ class RepsOrTimerView:UIView {
     private lazy var slider:UISlider = {
         let slider = UISlider()
         slider.minimumValue = 1
-        slider.maximumValue = 12
+        slider.maximumValue = 20
         slider.minimumTrackTintColor = .specialDarkBlue
         slider.maximumTrackTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         slider.translatesAutoresizingMaskIntoConstraints = false
-        /// slider.addTarget сделать потом
+        slider.addTarget(self, action: #selector(slider1Func), for: .valueChanged)
         return slider
     }()
     
@@ -37,7 +38,7 @@ class RepsOrTimerView:UIView {
     
     private let repsLabel = UILabel(text: "Повторения", fontName: "Roboto-Medium", fontSize: 23, textColor: .specialDarkBlue, opacity: 1)
     
-    private let countOfRepsLabel = UILabel(text: "10", fontName: "Roboto-Medium", fontSize: 23, textColor: .specialDarkBlue, opacity: 1)
+    private let countOfRepsLabel = UILabel(text: "1", fontName: "Roboto-Medium", fontSize: 23, textColor: .specialDarkBlue, opacity: 1)
     
     private let stackView2:UIStackView = {
         let stack = UIStackView()
@@ -49,19 +50,19 @@ class RepsOrTimerView:UIView {
     
     private lazy var slider2:UISlider = {
         let slider = UISlider()
-        slider.minimumValue = 1
-        slider.maximumValue = 22
+        slider.minimumValue = 0
+        slider.maximumValue = 50
         slider.minimumTrackTintColor = .specialDarkBlue
         slider.maximumTrackTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         slider.translatesAutoresizingMaskIntoConstraints = false
-        /// slider.addTarget сделать потом
+        slider.addTarget(self, action: #selector(slider2Func), for: .valueChanged)
         return slider
     }()
     
     
     private let timerLabel = UILabel(text: "Таймер", fontName: "Roboto-Medium", fontSize: 23, textColor: .specialDarkBlue, opacity: 1)
     
-    private let timeLabel = UILabel(text: "1 мин 30 сек", fontName: "Roboto-Medium", fontSize: 23, textColor: .specialDarkBlue, opacity: 1)
+    private let timeLabel = UILabel(text: "0 сек", fontName: "Roboto-Medium", fontSize: 23, textColor: .specialDarkBlue, opacity: 1)
     
     private let stackView3:UIStackView = {
         let stack = UIStackView()
@@ -74,11 +75,11 @@ class RepsOrTimerView:UIView {
     private lazy var slider3:UISlider = {
         let slider = UISlider()
         slider.minimumValue = 0
-        slider.maximumValue = 60
+        slider.maximumValue = 300
         slider.minimumTrackTintColor = .specialDarkBlue
         slider.maximumTrackTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         slider.translatesAutoresizingMaskIntoConstraints = false
-        /// slider.addTarget сделать потом
+        slider.addTarget(self, action: #selector(slider3Func), for: .valueChanged)
         return slider
     }()
     
@@ -113,6 +114,56 @@ class RepsOrTimerView:UIView {
         stackView3.addArrangedSubview(timeLabel)
         self.addSubview(slider3)
     }
+    
+    @objc private func slider1Func() {
+        countOfSetsLabel.text = "\(Int(slider.value))"
+    }
+    
+    @objc private func slider2Func() {
+        countOfRepsLabel.text = "\(Int(slider2.value))"
+        setNegative(label: timerLabel, numberLabel: timeLabel, slider: slider3)
+        setActive(label: repsLabel, numberLabel: countOfRepsLabel, slider: slider2)
+    }
+    
+    @objc private func slider3Func() {
+        
+        let (min, sec) = { (secs:Int)-> (Int, Int) in
+            return (secs / 60, secs % 60)}(Int(slider3.value))
+        
+        setNegative(label: repsLabel, numberLabel: countOfRepsLabel, slider: slider2)
+        setActive(label: timerLabel, numberLabel: timeLabel, slider: slider3)
+        
+        guard (min) != 0 else { return timeLabel.text = (min) == 0 ? "\(sec) сек" : "\(min) мин \(sec) сек" }
+        timeLabel.text = (sec) == 0 ? "\(min) мин" : "\(min) мин \(sec) сек"
+    }
+    
+    private func setNegative(label:UILabel, numberLabel:UILabel, slider:UISlider) {
+        label.alpha = 0.5
+        numberLabel.alpha = 0.5
+        slider.alpha = 0.5
+        slider.value = 0
+        guard numberLabel != timeLabel else { return numberLabel.text = "0 сек" }
+        numberLabel.text = "0"
+    }
+    
+    private func setActive(label:UILabel, numberLabel:UILabel, slider:UISlider) {
+        label.alpha = 1
+        numberLabel.alpha = 1
+        slider.alpha = 1
+    }
+    
+    private func getSetsAndRepsOrTimer() -> (Int, Int, Int) {
+        let setsSliderValue = Int(slider.value)
+        let repsSliderValue = Int(slider2.value)
+        let timerSliderValue = Int(slider3.value)
+        return (setsSliderValue, repsSliderValue, timerSliderValue)
+    }
+    
+    public func setDateAndRepeat() -> (Int, Int, Int) {
+        getSetsAndRepsOrTimer()
+    }
+    
+    
 }
 
 // MARK: - setContrains
