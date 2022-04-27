@@ -77,6 +77,15 @@ class DateAndRepeatView:UIView {
     public func setDateAndRepeat() -> (Date, Bool) {
         getDateAndRepeat()
     }
+    
+    private func refreshData() {
+        datePicker.setDate(Date(), animated: true)
+        switchRep.isOn = true
+    }
+    
+    public func refreshDatepickerAndSwitch() {
+        refreshData()
+    }
 }
 
 // MARK: - setContrains

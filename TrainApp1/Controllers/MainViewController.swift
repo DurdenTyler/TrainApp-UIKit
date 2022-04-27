@@ -77,6 +77,7 @@ class MainViewController: UIViewController {
     private func setDelegates() {
         tableView.dataSource = self
         tableView.delegate = self
+        calendarView.cellCollectionViewDelegate = self
     }
     
     @objc private func addWorkoutButtonTapped() {
@@ -163,5 +164,14 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         105
     }
+    
+}
+
+//MARK: - SelectCollectionViewItemProtocol
+extension MainViewController:SelectCollectionViewItemProtocol {
+    func selectItem(date: Date) {
+        print(date)
+    }
+    
     
 }

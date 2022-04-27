@@ -65,6 +65,15 @@ class CalendarCollectionCell:UICollectionViewCell{
         self.addSubview(numberOfMonth)
     }
     
+    private func cellConfigure(numberMonth:String, dayWeek:String) {
+        numberOfMonth.text = numberMonth
+        dayOfWeek.text = dayWeek
+    }
+    
+    public func dateForCell(numberMonth:String, dayWeek:String) {
+        cellConfigure(numberMonth: numberMonth, dayWeek: dayWeek)
+    }
+    
 }
 
 // MARK: - setContrains

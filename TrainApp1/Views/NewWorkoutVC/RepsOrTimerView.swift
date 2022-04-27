@@ -6,13 +6,12 @@
 //
 
 import UIKit
-import RealmSwift
 
 class RepsOrTimerView:UIView {
     
     private let setsLabel = UILabel(text: "Подходы", fontName: "Roboto-Medium", fontSize: 23, textColor: .specialDarkBlue, opacity: 1)
     
-    private let countOfSetsLabel = UILabel(text: "1", fontName: "Roboto-Medium", fontSize: 23, textColor: .specialDarkBlue, opacity: 1)
+    private let countOfSetsLabel = UILabel(text: "0", fontName: "Roboto-Medium", fontSize: 23, textColor: .specialDarkBlue, opacity: 1)
     
     private let stackView:UIStackView = {
         let stack = UIStackView()
@@ -24,7 +23,7 @@ class RepsOrTimerView:UIView {
     
     private lazy var slider:UISlider = {
         let slider = UISlider()
-        slider.minimumValue = 1
+        slider.minimumValue = 0
         slider.maximumValue = 20
         slider.minimumTrackTintColor = .specialDarkBlue
         slider.maximumTrackTintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -161,6 +160,19 @@ class RepsOrTimerView:UIView {
     
     public func setDateAndRepeat() -> (Int, Int, Int) {
         getSetsAndRepsOrTimer()
+    }
+    
+    private func refreshData() {
+        slider.value = 0
+        slider2.value = 0
+        slider3.value = 0
+        countOfSetsLabel.text = "0"
+        countOfRepsLabel.text = "0"
+        timeLabel.text = "0"
+    }
+    
+    public func refreshAllSlidersAndLabels() {
+        refreshData()
     }
     
     

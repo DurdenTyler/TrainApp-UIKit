@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 class NewWorkoutViewController: UIViewController {
     
@@ -16,7 +15,6 @@ class NewWorkoutViewController: UIViewController {
     
     private let nameTextField:UITextField = {
         let field = UITextField()
-        field.translatesAutoresizingMaskIntoConstraints = false
         field.backgroundColor = .white
         field.textColor = .specialDarkBlue
         field.layer.cornerRadius = 8
@@ -28,6 +26,7 @@ class NewWorkoutViewController: UIViewController {
         /// Что бы был небольшой отступ у правого края при начале ввода
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
         field.leftViewMode = .always
+        field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
     
@@ -38,8 +37,6 @@ class NewWorkoutViewController: UIViewController {
     private let timerLabel = UILabel(text: "Повторения или время", fontSize: 12, textColor: .specialYellow, opacity: 0.7)
     
     private let repsOrTimer = RepsOrTimerView()
-    
-    private let localRealm = try! Realm()
     
     private var workoutModel = WorkoutModel()
     
@@ -71,7 +68,9 @@ class NewWorkoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        setDelegates()
         setContrains()
+        addTaps()
     }
     
     private func setupViews() {
@@ -87,14 +86,29 @@ class NewWorkoutViewController: UIViewController {
         view.addSubview(backButton)
     }
     
-    @objc private func backFuncButton() {
-        dismiss(animated: true)
+    private func setDelegates() {
+        nameTextField.delegate = self
     }
     
-    @objc private func saveFuncButton() {
-        setModel()
-        RealmManager.shared.saveWorkoutModel(model: workoutModel)
-        workoutModel = WorkoutModel()
+    private func addTaps() {
+        let tapScreen = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapScreen)
+        
+        let swipeScreen = UISwipeGestureRecognizer(target: self, action: #selector(swipeHideKeyboard))
+        swipeScreen.cancelsTouchesInView = false
+        view.addGestureRecognizer(swipeScreen)
+    }
+    
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc private func swipeHideKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc private func backFuncButton() {
+        dismiss(animated: true)
     }
     
     private func setModel() {
@@ -109,6 +123,31 @@ class NewWorkoutViewController: UIViewController {
         workoutModel.workoutSets = repsOrTimer.setDateAndRepeat().0
         workoutModel.workoutReps = repsOrTimer.setDateAndRepeat().1
         workoutModel.workoutTimer = repsOrTimer.setDateAndRepeat().2
+    }
+    
+    private func saveModel() {
+        guard let text = nameTextField.text else { return }
+        let textCount = text.filter {$0.isNumber || $0.isLetter}.count
+        
+        if textCount != 0 && (workoutModel.workoutReps != 0 || workoutModel.workoutTimer != 0) {
+            RealmManager.shared.saveWorkoutModel(model: workoutModel)
+            workoutModel = WorkoutModel()
+            alertSimpleOK(title: "Успешно", message: nil)
+            refreshObjects()
+        }else {
+            alertSimpleOK(title: "Ошибка", message: "Заполните данные")
+        }
+    }
+    
+    @objc private func saveFuncButton() {
+        setModel()
+        saveModel()
+    }
+    
+    private func refreshObjects() {
+        dateAndRepeatView.refreshDatepickerAndSwitch()
+        repsOrTimer.refreshAllSlidersAndLabels()
+        nameTextField.text = ""
     }
     
 }
@@ -170,5 +209,14 @@ extension NewWorkoutViewController {
             backButton.widthAnchor.constraint(equalToConstant: 120),
             backButton.heightAnchor.constraint(equalToConstant: 60)
         ])
+    }
+}
+
+
+// MARK: UITextFieldDelegate
+extension NewWorkoutViewController:UITextFieldDelegate {
+    // этот метод срабатывает когда мы нажимаем на клавиатуре на готово
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        nameTextField.resignFirstResponder() // типо убираем с основного плана
     }
 }
