@@ -29,7 +29,6 @@ class WorkoutTableCell:UITableViewCell {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.contentMode = .scaleAspectFit
-        image.image = UIImage(named: "imageCell")?.withRenderingMode(.alwaysTemplate)
         image.tintColor = #colorLiteral(red: 0.1254901961, green: 0.3764705882, blue: 0.6941176471, alpha: 1)
         return image
     }()
@@ -83,6 +82,38 @@ class WorkoutTableCell:UITableViewCell {
     
     @objc private func myFn() {
         print("addWorkoutButtonTapped is working...")
+    }
+    
+    private func cellConfigure(model: WorkoutModel) {
+        
+        labelOne.text = model.workoutName
+        
+        let (min, sec) = { (secs:Int)-> (Int, Int) in
+            return (secs / 60, secs % 60)}(Int(model.workoutTimer))
+        
+        labelTwo.text = model.workoutTimer == 0 ? "Повторы: \(model.workoutReps)" : "Время: \(min) мин \(sec) сек"
+        labelThree.text = "Повторы: \(model.workoutSets)"
+        
+        if model.workoutStatus {
+            workoutButton.setTitle("Выполнено", for: .normal)
+            workoutButton.tintColor = .specialYellow
+            workoutButton.backgroundColor = .specialDarkBlue
+            workoutButton.isEnabled = false
+        } else {
+            workoutButton.setTitle("Начать", for: .normal)
+            workoutButton.tintColor = .specialDarkBlue
+            workoutButton.backgroundColor = .specialYellow
+            workoutButton.isEnabled = true
+        }
+        
+        guard let imageData = model.workoutImg else { return }
+        guard let image = UIImage(data: imageData) else { return }
+        
+        imageTable.image = image.withRenderingMode(.alwaysTemplate)
+    }
+    
+    public func configureCell(model: WorkoutModel) {
+        cellConfigure(model: model)
     }
     
 }

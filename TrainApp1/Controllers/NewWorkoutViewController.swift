@@ -40,6 +40,8 @@ class NewWorkoutViewController: UIViewController {
     
     private var workoutModel = WorkoutModel()
     
+    private let testImage = UIImage(named: "testWorkout")
+    
     private let saveButton:UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -116,13 +118,16 @@ class NewWorkoutViewController: UIViewController {
         workoutModel.workoutName = nameWorkout
         
         let dateFromPicker = dateAndRepeatView.setDateAndRepeat().0
-        workoutModel.workoutDate = dateFromPicker
+        workoutModel.workoutDate = dateFromPicker.localDate()
         workoutModel.workoutNumberOfDay = dateFromPicker.getWeekdayNumber()
         
         workoutModel.workoutRepeat = dateAndRepeatView.setDateAndRepeat().1
         workoutModel.workoutSets = repsOrTimer.setDateAndRepeat().0
         workoutModel.workoutReps = repsOrTimer.setDateAndRepeat().1
         workoutModel.workoutTimer = repsOrTimer.setDateAndRepeat().2
+        
+        guard let imageData = testImage?.pngData() else { return }
+        workoutModel.workoutImg = imageData
     }
     
     private func saveModel() {

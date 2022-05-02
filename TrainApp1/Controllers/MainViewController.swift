@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UIViewController {
 
@@ -34,6 +35,18 @@ class MainViewController: UIViewController {
         return table
     }()
     
+    private let noTrainingImageView:UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "NoTraining")
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let noTrainigLabel = UILabel(text: "Нет тренировки", fontName: "Roboto-Medium", fontSize: 25, textColor: .specialDarkBlue, opacity: 1)
+    
+    private let pressPlusLabel = UILabel(text: "нажмите + что бы добавить", fontName: "Roboto-Medium", fontSize: 16, textColor: .specialDarkBlue, opacity: 1)
+    
     /// Создаем идентификатор для ячейки таблицы
     private let idWorkoutTableViewCell = "idWorkoutTableViewCell"
     
@@ -42,6 +55,10 @@ class MainViewController: UIViewController {
     private let calendarView = CalendarView()
     
     private let whatWeather = WhatWeather()
+    
+    private let localRealm = try! Realm()
+    private var workoutArray: Results<WorkoutModel>!
+    
     
     
     /// Существуют разные методы что срабатывают в разное время загрузки экрана
@@ -59,10 +76,14 @@ class MainViewController: UIViewController {
         setupViews()
         setContrains()
         setDelegates()
+        getWorkout(date: Date())
     }
     
     private func setupViews() {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        view.addSubview(noTrainingImageView)
+        view.addSubview(noTrainigLabel)
+        view.addSubview(pressPlusLabel)
         view.addSubview(whatWeather)
         view.addSubview(calendarView)
         view.addSubview(userImageView)
@@ -84,6 +105,39 @@ class MainViewController: UIViewController {
         let newWorkoutViewController = NewWorkoutViewController()
         newWorkoutViewController.modalPresentationStyle = .fullScreen /// Выбираем на весь экран или как модальное окно
         present(newWorkoutViewController, animated: true)
+    }
+    
+    private func getWorkout(date: Date) {
+        let weekday = date.getWeekdayNumber()
+        let dateStart = date.starEndDate().0
+        let dateEnd = date.starEndDate().1
+        
+        let predicateRepeat = NSPredicate(format: "workoutNumberOfDay = \(weekday) AND workoutRepeat = true")
+        let predicateUnRepeat = NSPredicate(format: "workoutRepeat = false AND workoutDate BETWEEN %@", [dateStart, dateEnd])
+        let compound = NSCompoundPredicate(type: .or, subpredicates: [predicateRepeat, predicateUnRepeat])
+        
+        workoutArray = localRealm.objects(WorkoutModel.self).filter(compound).sorted(byKeyPath: "workoutName")
+        // такой вот записью мы получим все записи по нашей модели WorkoutModel
+        // затем эти записи мы хотим отфильтровать
+        // и затем мы хотим отсортировать их по имени
+        
+        checkWorkouts()
+        tableView.reloadData()
+        // затем каждый раз перезагржаем таблицу что бы данные обновились
+    }
+    
+    private func checkWorkouts() {
+        if workoutArray.count == 0 {
+            noTrainingImageView.isHidden = false
+            noTrainigLabel.isHidden = false
+            pressPlusLabel.isHidden = false
+            tableView.isHidden = true
+        } else {
+            noTrainingImageView.isHidden = true
+            noTrainigLabel.isHidden = true
+            pressPlusLabel.isHidden = true
+            tableView.isHidden = false
+        }
     }
     
 }
@@ -138,6 +192,24 @@ extension MainViewController {
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
+        
+        NSLayoutConstraint.activate([
+            noTrainingImageView.topAnchor.constraint(equalTo: workoutTodayLabel.bottomAnchor, constant: 10),
+            noTrainingImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+            noTrainingImageView.heightAnchor.constraint(equalToConstant: 400),
+            noTrainingImageView.widthAnchor.constraint(equalToConstant: 350)
+        ])
+        
+        NSLayoutConstraint.activate([
+            noTrainigLabel.topAnchor.constraint(equalTo: noTrainingImageView.bottomAnchor, constant: 2),
+            noTrainigLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -80)
+        ])
+        
+        NSLayoutConstraint.activate([
+            pressPlusLabel.topAnchor.constraint(equalTo: noTrainigLabel.bottomAnchor, constant: 5),
+            pressPlusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 80)
+        ])
+        
     }
 }
 
@@ -146,13 +218,15 @@ extension MainViewController {
 extension MainViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        15
+        workoutArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: idWorkoutTableViewCell, for: indexPath) as? WorkoutTableCell else {
             return UITableViewCell()
         }
+        let model = workoutArray[indexPath.row]
+        cell.configureCell(model: model)
         return cell
     }
 }
@@ -170,7 +244,7 @@ extension MainViewController: UITableViewDelegate {
 //MARK: - SelectCollectionViewItemProtocol
 extension MainViewController:SelectCollectionViewItemProtocol {
     func selectItem(date: Date) {
-        print(date)
+        getWorkout(date: date)
     }
     
     

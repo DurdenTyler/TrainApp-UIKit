@@ -16,6 +16,7 @@ extension Date {
         let localTime = Calendar.current.date(byAdding: .second, value: Int(timezoneOffset), to: self) ?? Date()
         return localTime
     }
+
     
     /// Добираемся к локальному времени телефона для того что бы занести в БД в локальном времени телефона
     
@@ -26,14 +27,20 @@ extension Date {
         return weekday
     }
     
+    
+    
     func getWeekArray()->[[String]] {
+        let timeZone = TimeZone(abbreviation: "UTC") ?? .current
+        
+        
         let formatter = DateFormatter() // делаем форматор что бы понедельник был пн итд
         formatter.locale = Locale(identifier: "ru_RU")
+        formatter.timeZone = timeZone
         formatter.dateFormat = "EEEEEE"
         
         var weekArray : [[String]] = [[], []]
         var calendar = Calendar.current
-        calendar.timeZone = TimeZone(abbreviation: "UTC") ?? .current
+        calendar.timeZone = timeZone
         
         for index in -6...0 {
             let date = calendar.date(byAdding: .day, value: index, to: self) ?? Date()
@@ -51,5 +58,26 @@ extension Date {
     func offsetDays(days:Int)->Date {
         let offsetDays = Calendar.current.date(byAdding: .day, value: -days, to: self) ?? Date()
         return offsetDays
+    }
+    
+    
+    
+    func starEndDate() -> (Date, Date) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        
+        let calendar = Calendar.current
+        let day = calendar.component(.day, from: self)
+        let month = calendar.component(.month, from: self)
+        let year = calendar.component(.year, from: self)
+        let dateStart = formatter.date(from: "\(year)/\(month)/\(day)") ?? Date()
+        
+        let local = dateStart.localDate()
+        let dateEnd: Date = {
+            let components = DateComponents(day: 1)
+            return calendar.date(byAdding: components, to: local) ?? Date()
+        }()
+        
+        return (local, dateEnd)
     }
 }
