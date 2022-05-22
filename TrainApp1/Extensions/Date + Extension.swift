@@ -60,6 +60,11 @@ extension Date {
         return offsetDays
     }
     
+    func offsetMonth(month:Int)->Date {
+        let offsetMonth = Calendar.current.date(byAdding: .month, value: -month, to: self) ?? Date()
+        return offsetMonth
+    }
+    
     
     
     func starEndDate() -> (Date, Date) {

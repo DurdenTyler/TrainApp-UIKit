@@ -49,6 +49,29 @@ class StaticTableCell:UITableViewCell {
 
     }
     
+    private func cellConfigure(differenceWorkout: DifferenceWorkout) {
+        
+        labelMain.text = differenceWorkout.name
+        
+        labelTwo.text = "Раньше: \(differenceWorkout.firstReps)"
+        labelThree.text = "Сейчас: \(differenceWorkout.lastReps)"
+        
+        if (differenceWorkout.lastReps - differenceWorkout.firstReps) >= 1 {
+            labelNumber.text = "+\(differenceWorkout.lastReps - differenceWorkout.firstReps)"
+            labelNumber.textColor = .specialYellow
+        } else if (differenceWorkout.lastReps - differenceWorkout.firstReps) < 0 {
+            labelNumber.text = "\(differenceWorkout.lastReps - differenceWorkout.firstReps)"
+            labelNumber.textColor = #colorLiteral(red: 1, green: 0.2734971941, blue: 0.3645941615, alpha: 1)
+        } else {
+            labelNumber.text = "0"
+            labelNumber.textColor = .white
+        }
+    }
+    
+    public func configureCell(differenceWorkout: DifferenceWorkout) {
+        cellConfigure(differenceWorkout: differenceWorkout)
+    }
+    
 }
 
 // MARK: - setContrains

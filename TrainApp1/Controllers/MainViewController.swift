@@ -76,7 +76,12 @@ class MainViewController: UIViewController {
         setupViews()
         setContrains()
         setDelegates()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getWorkout(date: Date())
+        tableView.reloadData()
     }
     
     private func setupViews() {
@@ -227,6 +232,7 @@ extension MainViewController: UITableViewDataSource {
         }
         let model = workoutArray[indexPath.row]
         cell.configureCell(model: model)
+        cell.cellStartWorkoutDelegate = self
         return cell
     }
 }
@@ -239,6 +245,20 @@ extension MainViewController: UITableViewDelegate {
         105
     }
     
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
+            let deleteModel = self.workoutArray[indexPath.row]
+            RealmManager.shared.deleteWorkoutModel(model: deleteModel)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        
+        action.backgroundColor = .white
+        action.image = UIImage(named: "delete")
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+    
 }
 
 //MARK: - SelectCollectionViewItemProtocol
@@ -246,6 +266,22 @@ extension MainViewController:SelectCollectionViewItemProtocol {
     func selectItem(date: Date) {
         getWorkout(date: date)
     }
-    
-    
+}
+
+
+//MARK: - SelectCollectionViewItemProtocol
+extension MainViewController:StartWorkoutProtocol {
+    func startButtonTapped(model: WorkoutModel) {
+        if model.workoutTimer == 0 {
+            let startWorkoutVC = StartWorkoutViewController()
+            startWorkoutVC.modalPresentationStyle = .fullScreen
+            startWorkoutVC.workoutModel = model
+            present(startWorkoutVC, animated: true)
+        } else {
+            let startWorkoutTimerVC = StartWorkoutTimerViewController()
+            startWorkoutTimerVC.modalPresentationStyle = .fullScreen
+            startWorkoutTimerVC.workoutModel = model
+            present(startWorkoutTimerVC, animated: true)
+        }
+    }
 }

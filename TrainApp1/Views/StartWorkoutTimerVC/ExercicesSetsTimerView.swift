@@ -7,13 +7,18 @@
 
 import UIKit
 
+protocol StartWorkoutTimerButtonsProtocol: AnyObject {
+    func editingButton()
+    func nextButton()
+}
+
 class ExercicesSetsTimerView:UIView {
     
-    private let labelName = UILabel(text: "Планка", fontName: "Roboto-Medium", fontSize: 24, textColor: .specialDarkBlue, opacity: 1)
+    let labelName = UILabel(text: "Планка", fontName: "Roboto-Medium", fontSize: 24, textColor: .specialDarkBlue, opacity: 1)
     
     private let setsLabel = UILabel(text: "Подходы", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
     
-    private let countOfSetsLabel = UILabel(text: "1/4", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
+    let countOfSetsLabel = UILabel(text: "1/4", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
     
     private let stackView:UIStackView = {
         let stack = UIStackView()
@@ -32,7 +37,7 @@ class ExercicesSetsTimerView:UIView {
     
     private let repsLabel = UILabel(text: "Время подхода", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
     
-    private let countOfRepsLabel = UILabel(text: "1 мин 30 сек", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
+    let countOfRepsLabel = UILabel(text: "1 мин 30 сек", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
     
     private let stackView2:UIStackView = {
         let stack = UIStackView()
@@ -49,7 +54,7 @@ class ExercicesSetsTimerView:UIView {
         return sepView
     }()
     
-    private let editingButton:UIButton = {
+    let editingButton:UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -60,7 +65,7 @@ class ExercicesSetsTimerView:UIView {
         return button
     }()
     
-    private let nextSetButton:UIButton = {
+    let nextSetButton:UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .specialYellow
@@ -71,6 +76,8 @@ class ExercicesSetsTimerView:UIView {
         button.addTarget(self, action: #selector(nextSetFuncButton), for: .touchUpInside)
         return button
     }()
+    
+    weak var delegate: StartWorkoutTimerButtonsProtocol?
     
     
     override init(frame: CGRect) {
@@ -101,11 +108,11 @@ class ExercicesSetsTimerView:UIView {
     }
     
     @objc private func editingFuncButton() {
-        ///
+        delegate?.editingButton()
     }
     
     @objc private func nextSetFuncButton() {
-        ///
+        delegate?.nextButton()
     }
 }
 

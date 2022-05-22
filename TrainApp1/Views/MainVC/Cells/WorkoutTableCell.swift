@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol StartWorkoutProtocol: AnyObject {
+    func startButtonTapped(model: WorkoutModel)
+}
+
 class WorkoutTableCell:UITableViewCell {
     
     private let backgroundCell:UIView = {
@@ -36,9 +40,9 @@ class WorkoutTableCell:UITableViewCell {
     
     private let labelOne = UILabel(text: "Отжимания", fontName: "Roboto-Medium", fontSize: 21, textColor: .white, opacity: 1)
     
-    private let labelTwo = UILabel(text: "Повторений: 10", fontName: "Roboto-Medium", fontSize: 15, textColor: .white, opacity: 0.8)
+    private let labelThree = UILabel(text: "Повторений: 10", fontName: "Roboto-Medium", fontSize: 15, textColor: .white, opacity: 0.8)
     
-    private let labelThree = UILabel(text: "Подходов: 4", fontName: "Roboto-Medium", fontSize: 15, textColor: .white, opacity: 0.8)
+    private let labelTwo = UILabel(text: "Подходов: 4", fontName: "Roboto-Medium", fontSize: 15, textColor: .white, opacity: 0.8)
     
     
     private let workoutButton:UIButton = {
@@ -55,6 +59,10 @@ class WorkoutTableCell:UITableViewCell {
     }()
     
     var stackView = UIStackView()
+    
+    var workoutModel = WorkoutModel()
+    
+    weak var cellStartWorkoutDelegate:StartWorkoutProtocol?
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -74,17 +82,19 @@ class WorkoutTableCell:UITableViewCell {
         self.addSubview(backgroundImage)
         self.addSubview(imageTable)
         self.addSubview(labelOne)
-        stackView = UIStackView(arrangedSubviews: [labelTwo, labelThree], axis: .horizontal, spacing: 10)
+        stackView = UIStackView(arrangedSubviews: [labelThree, labelTwo], axis: .horizontal, spacing: 10)
         self.addSubview(stackView)
         contentView.addSubview(workoutButton)
 
     }
     
     @objc private func myFn() {
-        print("addWorkoutButtonTapped is working...")
+        cellStartWorkoutDelegate?.startButtonTapped(model: workoutModel)
     }
     
     private func cellConfigure(model: WorkoutModel) {
+        
+        workoutModel = model
         
         labelOne.text = model.workoutName
         
@@ -92,12 +102,12 @@ class WorkoutTableCell:UITableViewCell {
             return (secs / 60, secs % 60)}(Int(model.workoutTimer))
         
         labelTwo.text = model.workoutTimer == 0 ? "Повторы: \(model.workoutReps)" : "Время: \(min) мин \(sec) сек"
-        labelThree.text = "Повторы: \(model.workoutSets)"
+        labelThree.text = "Подходы: \(model.workoutSets)"
         
         if model.workoutStatus {
             workoutButton.setTitle("Выполнено", for: .normal)
-            workoutButton.tintColor = .specialYellow
-            workoutButton.backgroundColor = .specialDarkBlue
+            workoutButton.tintColor = .specialDarkBlue
+            workoutButton.backgroundColor = #colorLiteral(red: 0, green: 0.8796558976, blue: 0, alpha: 1)
             workoutButton.isEnabled = false
         } else {
             workoutButton.setTitle("Начать", for: .normal)

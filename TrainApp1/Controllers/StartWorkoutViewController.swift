@@ -10,6 +10,7 @@ import RealmSwift
 
 class StartWorkoutViewController: UIViewController {
     
+    
     private let newWorkoutLabel = UILabel(text: "Тренировка", fontName: "Roboto-Medium", fontSize: 28, textColor: .white, opacity: 1)
     
     private let viewImage:UIImageView = {
@@ -22,6 +23,8 @@ class StartWorkoutViewController: UIViewController {
     private let detailLabel = UILabel(text: "Упражнение", fontSize: 12 ,textColor: .specialYellow, opacity: 0.7)
     
     private let exercicesSetsReps = ExercicesSetsRepsView()
+    
+    private var customAlertReps = CustomAlertReps()
     
     private let finishButton:UIButton = {
         let button = UIButton(type: .system)
@@ -47,11 +50,14 @@ class StartWorkoutViewController: UIViewController {
         return button
     }()
     
+    var workoutModel = WorkoutModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setContrains()
+        cellConfigure()
+        setDelegates()
     }
     
     private func setupViews() {
@@ -62,6 +68,8 @@ class StartWorkoutViewController: UIViewController {
         view.addSubview(exercicesSetsReps)
         view.addSubview(finishButton)
         view.addSubview(backButton)
+        view.addSubview(customAlertReps)
+        customAlertReps.isHidden = true
     }
     
     @objc private func backFuncButton() {
@@ -69,7 +77,25 @@ class StartWorkoutViewController: UIViewController {
     }
     
     @objc private func finishFuncButton() {
-        ///
+        if countOfSets == workoutModel.workoutSets {
+            dismiss(animated: true)
+            RealmManager.shared.updateStatusWorkoutModel(model: workoutModel, bool: true)
+        }
+    }
+    
+    private func setDelegates() {
+        exercicesSetsReps.delegate = self
+        customAlertReps.delegate = self
+    }
+    
+    private var countOfSets = 1
+    
+    private func cellConfigure() {
+        
+        exercicesSetsReps.labelName.text = workoutModel.workoutName
+        exercicesSetsReps.countOfSetsLabel.text = "\(countOfSets)/\(workoutModel.workoutSets)"
+        exercicesSetsReps.countOfRepsLabel.text = "\(workoutModel.workoutReps)"
+        
     }
     
 }
@@ -112,5 +138,49 @@ extension StartWorkoutViewController {
             backButton.widthAnchor.constraint(equalToConstant: 120),
             backButton.heightAnchor.constraint(equalToConstant: 60)
         ])
+        
+        NSLayoutConstraint.activate([
+            customAlertReps.topAnchor.constraint(equalTo: view.topAnchor),
+            customAlertReps.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            customAlertReps.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            customAlertReps.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+}
+
+// MARK: - StartWorkoutButtonsProtocol
+extension StartWorkoutViewController:StartWorkoutButtonsProtocol {
+    func editingButton() {
+        customAlertReps.isHidden = false
+    }
+    
+    func nextButton() {
+        if countOfSets < workoutModel.workoutSets {
+            countOfSets += 1
+            exercicesSetsReps.countOfSetsLabel.text = "\(countOfSets)/\(workoutModel.workoutSets)"
+        } else {
+            alertSimpleOK(title: "Конец упражнения", message: "Нажмите закончить, что бы перейти к следующему упражнению")
+        }
+    }
+}
+
+// MARK: - CustomAlertProtocol
+extension StartWorkoutViewController:CustomAlertProtocol {
+    
+    func backButtonPressed() {
+        customAlertReps.removeFromSuperview()
+    }
+    
+    func saveButtonPressed() {
+        guard let setsNumber = customAlertReps.setsTextField.text else { return }
+        guard let repsNumber = customAlertReps.repsTextField.text else { return }
+        if setsNumber != "" && repsNumber != "" {
+            exercicesSetsReps.countOfSetsLabel.text = "\(countOfSets)/\(setsNumber)"
+            exercicesSetsReps.countOfRepsLabel.text = "\(repsNumber)"
+            guard let numbersOfSets = Int(setsNumber) else { return }
+            guard let numbersOfReps = Int(repsNumber) else { return }
+            RealmManager.shared.updateSetsRepsWorkoutModel(model: workoutModel, sets: numbersOfSets, reps: numbersOfReps)
+            customAlertReps.removeFromSuperview()
+        }
     }
 }

@@ -7,13 +7,18 @@
 
 import UIKit
 
+protocol StartWorkoutButtonsProtocol: AnyObject {
+    func editingButton()
+    func nextButton()
+}
+
 class ExercicesSetsRepsView:UIView {
     
-    private let labelName = UILabel(text: "Отжимания", fontName: "Roboto-Medium", fontSize: 24, textColor: .specialDarkBlue, opacity: 1)
+    let labelName = UILabel(text: "Отжимания", fontName: "Roboto-Medium", fontSize: 24, textColor: .specialDarkBlue, opacity: 1)
     
     private let setsLabel = UILabel(text: "Подходы", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
     
-    private let countOfSetsLabel = UILabel(text: "1/4", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
+    let countOfSetsLabel = UILabel(text: "1/4", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
     
     private let stackView:UIStackView = {
         let stack = UIStackView()
@@ -32,7 +37,7 @@ class ExercicesSetsRepsView:UIView {
     
     private let repsLabel = UILabel(text: "Повторения", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
     
-    private let countOfRepsLabel = UILabel(text: "20", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
+    let countOfRepsLabel = UILabel(text: "20", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
     
     private let stackView2:UIStackView = {
         let stack = UIStackView()
@@ -72,6 +77,7 @@ class ExercicesSetsRepsView:UIView {
         return button
     }()
     
+    weak var delegate: StartWorkoutButtonsProtocol?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -101,11 +107,11 @@ class ExercicesSetsRepsView:UIView {
     }
     
     @objc private func editingFuncButton() {
-        ///
+        delegate?.editingButton()
     }
     
     @objc private func nextSetFuncButton() {
-        ///
+        delegate?.nextButton()
     }
 }
 

@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RealmSwift
+import SwiftUI
 
 class StaticViewController: UIViewController {
     
@@ -40,15 +42,48 @@ class StaticViewController: UIViewController {
         return table
     }()
     
-    
+    private let nameTextField:UITextField = {
+        let field = UITextField()
+        field.backgroundColor = .specialYellow
+        field.placeholder = "Поиск"
+        field.textColor = .specialDarkBlue
+        field.layer.cornerRadius = 8
+        field.borderStyle = .none
+        field.font = UIFont(name: "Roboto-Medium", size: 20)
+        field.clearButtonMode = .always
+        field.returnKeyType = .done
+        field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
+        field.leftViewMode = .always
+        field.translatesAutoresizingMaskIntoConstraints = false
+        return field
+    }()
     
     private let idStaticTableViewCell = "idStaticTableViewCell"
+    
+    private let localRealm = try! Realm()
+    
+    private var workoutArray: Results<WorkoutModel>!
+    
+    private var differenceArray = [DifferenceWorkout]()
+    
+    private var filtredArray = [DifferenceWorkout]()
+    
+    private var isFiltred = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setContrains()
         setDelegates()
+        setStartScreen()
+        addTaps()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        differenceArray = [DifferenceWorkout]()
+        setStartScreen()
+        tableStaticView.reloadData()
     }
     
     private func setupViews() {
@@ -57,6 +92,7 @@ class StaticViewController: UIViewController {
         view.addSubview(segControl)
         view.addSubview(exercicesLabel)
         view.addSubview(tableStaticView)
+        view.addSubview(nameTextField)
         tableStaticView.register(StaticTableCell.self, forCellReuseIdentifier: idStaticTableViewCell)
     }
     
@@ -64,13 +100,85 @@ class StaticViewController: UIViewController {
     private func setDelegates() {
         tableStaticView.dataSource = self
         tableStaticView.delegate = self
+        nameTextField.delegate = self
+    }
+    
+    private func addTaps() {
+        let tapScreen = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapScreen)
+        
+        let swipeScreen = UISwipeGestureRecognizer(target: self, action: #selector(swipeHideKeyboard))
+        swipeScreen.cancelsTouchesInView = false
+        view.addGestureRecognizer(swipeScreen)
+    }
+    
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
+    }
+    
+    @objc private func swipeHideKeyboard() {
+        view.endEditing(true)
     }
     
     @objc private func segmentChange() {
+        
+        let dateToday = Date().localDate()
+        differenceArray = [DifferenceWorkout]()
+        
         if segControl.selectedSegmentIndex == 0 {
-            print("0")
+            let dateStart = dateToday.offsetDays(days: 7)
+            getDifferenceModel(dateStart: dateStart)
         }else {
-            print("1")
+            let dateStart = dateToday.offsetMonth(month: 1)
+            getDifferenceModel(dateStart: dateStart)
+        }
+        
+        tableStaticView.reloadData()
+    }
+    
+    
+    private func getWorkoutNames() -> [String] {
+        var namesArray = [String]()
+        workoutArray = localRealm.objects(WorkoutModel.self)
+        
+        for workoutModel in workoutArray {
+            if !namesArray.contains(workoutModel.workoutName) {
+                namesArray.append(workoutModel.workoutName)
+            }
+        }
+        
+        return namesArray
+    }
+    
+    private func getDifferenceModel(dateStart: Date) {
+        let dateEnd = Date()
+        let namesArray = getWorkoutNames()
+        
+        for name in namesArray {
+            let predicateDifference = NSPredicate(format: "workoutName = '\(name)' AND workoutDate BETWEEN %@", [dateStart, dateEnd])
+            workoutArray = localRealm.objects(WorkoutModel.self).filter(predicateDifference).sorted(byKeyPath: "workoutDate")
+            
+            guard let last = workoutArray.last?.workoutReps,
+                  let first = workoutArray.first?.workoutReps else {
+                      return
+                  }
+            
+            let differenceWorkout = DifferenceWorkout(name: name, lastReps: last, firstReps: first)
+            differenceArray.append(differenceWorkout)
+        }
+    }
+    
+    private func setStartScreen() {
+        let dateStart = Date().localDate()
+        getDifferenceModel(dateStart: dateStart.offsetDays(days: 7))
+        tableStaticView.reloadData()
+    }
+    
+    private func filtringArray(text: String) {
+        for i in differenceArray {
+            if i.name.lowercased().contains(text.lowercased()) {
+                filtredArray.append(i)
+            }
         }
     }
     
@@ -91,7 +199,14 @@ extension StaticViewController {
         ])
         
         NSLayoutConstraint.activate([
-            exercicesLabel.topAnchor.constraint(equalTo: segControl.bottomAnchor, constant: 15),
+            nameTextField.topAnchor.constraint(equalTo: segControl.bottomAnchor, constant: 20),
+            nameTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            nameTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
+            nameTextField.heightAnchor.constraint(equalToConstant: 35)
+        ])
+        
+        NSLayoutConstraint.activate([
+            exercicesLabel.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 15),
             exercicesLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
         ])
         
@@ -108,7 +223,7 @@ extension StaticViewController {
 // MARK: - UITableViewDataSource
 extension StaticViewController:UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        isFiltred ? filtredArray.count : differenceArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,6 +231,8 @@ extension StaticViewController:UITableViewDataSource {
                 StaticTableCell else {
                     return UITableViewCell()
                 }
+        let differenceWorkout = isFiltred ? filtredArray[indexPath.row] : differenceArray[indexPath.row]
+        cell.configureCell(differenceWorkout: differenceWorkout)
         return cell
     }
 }
@@ -125,4 +242,37 @@ extension StaticViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         85
     }
+}
+
+// MARK: UITextFieldDelegate
+extension StaticViewController:UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text, let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+            filtredArray = [DifferenceWorkout]()
+            isFiltred = updatedText.count > 0
+            filtringArray(text: updatedText)
+            tableStaticView.reloadData()
+        }
+        return true
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        isFiltred = false
+        differenceArray = [DifferenceWorkout]()
+        
+        if segControl.selectedSegmentIndex == 0 {
+            let dateToday = Date().localDate()
+            getDifferenceModel(dateStart: dateToday.offsetDays(days: 7))
+        }else {
+            let dateToday = Date().localDate()
+            getDifferenceModel(dateStart: dateToday.offsetMonth(month: 1))
+        }
+        tableStaticView.reloadData()
+        return true
+    }
+}
