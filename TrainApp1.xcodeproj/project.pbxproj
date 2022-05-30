@@ -31,8 +31,8 @@
 		DDA42CCE28100E6D00078D6B /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA42CCD28100E6D00078D6B /* WorkoutModel.swift */; };
 		DDA42CD1281012DE00078D6B /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA42CD0281012DE00078D6B /* RealmManager.swift */; };
 		DDA42CD32810256A00078D6B /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA42CD22810256A00078D6B /* Date + Extension.swift */; };
+		DDA6C8BA2844BCDC0083D71A /* Int + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA6C8B92844BCDC0083D71A /* Int + Extensions.swift */; };
 		DDC5F89B282681D000A29890 /* CustomAlertReps.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC5F89A282681D000A29890 /* CustomAlertReps.swift */; };
-		DDC81E412837860D00674EBA /* Int + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC81E402837860D00674EBA /* Int + Extensions.swift */; };
 		DDC81E43283798A400674EBA /* CustomAlertTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC81E42283798A400674EBA /* CustomAlertTimer.swift */; };
 		DDC858D3280924CA008B0EB4 /* UILabel + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC858D2280924CA008B0EB4 /* UILabel + Extensions.swift */; };
 		DDC858D728094508008B0EB4 /* UIColor + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC858D628094508008B0EB4 /* UIColor + Extensions.swift */; };
@@ -70,8 +70,8 @@
 		DDA42CCD28100E6D00078D6B /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
 		DDA42CD0281012DE00078D6B /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		DDA42CD22810256A00078D6B /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
+		DDA6C8B92844BCDC0083D71A /* Int + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + Extensions.swift"; sourceTree = "<group>"; };
 		DDC5F89A282681D000A29890 /* CustomAlertReps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertReps.swift; sourceTree = "<group>"; };
-		DDC81E402837860D00674EBA /* Int + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + Extensions.swift"; sourceTree = "<group>"; };
 		DDC81E42283798A400674EBA /* CustomAlertTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTimer.swift; sourceTree = "<group>"; };
 		DDC858D2280924CA008B0EB4 /* UILabel + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extensions.swift"; sourceTree = "<group>"; };
 		DDC858D628094508008B0EB4 /* UIColor + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extensions.swift"; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 				DDC858D2280924CA008B0EB4 /* UILabel + Extensions.swift */,
 				DDC858D628094508008B0EB4 /* UIColor + Extensions.swift */,
 				DDA42CD22810256A00078D6B /* Date + Extension.swift */,
-				DDC81E402837860D00674EBA /* Int + Extensions.swift */,
+				DDA6C8B92844BCDC0083D71A /* Int + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -383,13 +383,13 @@
 				DD408DE727FC22BC00028D33 /* SceneDelegate.swift in Sources */,
 				DDD58365280873F6006F26CE /* StaticTableCell.swift in Sources */,
 				DD48008F2804353300314DA6 /* UIView + Extensions.swift in Sources */,
-				DDC81E412837860D00674EBA /* Int + Extensions.swift in Sources */,
 				DDC858DB280D7BA5008B0EB4 /* NewWorkoutViewController.swift in Sources */,
 				DD1D7E98281167AA00907AD3 /* StartWorkoutTimerViewController.swift in Sources */,
 				DDD5835D2806AEE5006F26CE /* WorkoutTableCell.swift in Sources */,
 				DDA42CD1281012DE00078D6B /* RealmManager.swift in Sources */,
 				DD408E0127FED43400028D33 /* AddWorkoutButton.swift in Sources */,
 				DD86EF3E280DCFAA0035AB30 /* DateAndRepeatView.swift in Sources */,
+				DDA6C8BA2844BCDC0083D71A /* Int + Extensions.swift in Sources */,
 				DD1D7E93281146DC00907AD3 /* StartWorkoutViewController.swift in Sources */,
 				DDA42CD32810256A00078D6B /* Date + Extension.swift in Sources */,
 			);
