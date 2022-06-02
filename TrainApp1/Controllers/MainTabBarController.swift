@@ -26,8 +26,9 @@ class MainTabBarController: UITabBarController {
     private func setupViews() {
         let mainVC = MainViewController()
         let staticVS = StaticViewController()
+        let profileVC = ProfileViewController()
         
-        setViewControllers([mainVC, staticVS], animated: true)
+        setViewControllers([mainVC, staticVS, profileVC], animated: true)
         
         guard let items = tabBar.items else { return }
         
@@ -36,6 +37,9 @@ class MainTabBarController: UITabBarController {
         
         items[1].title = "Статистика"
         items[1].image = UIImage(systemName: "doc.plaintext")
+        
+        items[2].title = "Профиль"
+        items[2].image = UIImage(systemName: "person.crop.circle.fill")
         
     }
 

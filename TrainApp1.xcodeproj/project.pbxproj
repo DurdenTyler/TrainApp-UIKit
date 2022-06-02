@@ -32,6 +32,11 @@
 		DDA42CD1281012DE00078D6B /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA42CD0281012DE00078D6B /* RealmManager.swift */; };
 		DDA42CD32810256A00078D6B /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA42CD22810256A00078D6B /* Date + Extension.swift */; };
 		DDA6C8BA2844BCDC0083D71A /* Int + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA6C8B92844BCDC0083D71A /* Int + Extensions.swift */; };
+		DDA6C8BC284616B60083D71A /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA6C8BB284616B60083D71A /* ProfileViewController.swift */; };
+		DDA6C8BF2846181D0083D71A /* ProfileElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA6C8BE2846181D0083D71A /* ProfileElements.swift */; };
+		DDA6C8C228479CB40083D71A /* ProfileCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA6C8C128479CB40083D71A /* ProfileCollectionCell.swift */; };
+		DDA6C8C42847B5250083D71A /* EditingProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA6C8C32847B5250083D71A /* EditingProfileViewController.swift */; };
+		DDA6C8C72847B5A60083D71A /* EditingProfileElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA6C8C62847B5A60083D71A /* EditingProfileElements.swift */; };
 		DDC5F89B282681D000A29890 /* CustomAlertReps.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC5F89A282681D000A29890 /* CustomAlertReps.swift */; };
 		DDC81E43283798A400674EBA /* CustomAlertTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC81E42283798A400674EBA /* CustomAlertTimer.swift */; };
 		DDC858D3280924CA008B0EB4 /* UILabel + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC858D2280924CA008B0EB4 /* UILabel + Extensions.swift */; };
@@ -71,6 +76,11 @@
 		DDA42CD0281012DE00078D6B /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		DDA42CD22810256A00078D6B /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		DDA6C8B92844BCDC0083D71A /* Int + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + Extensions.swift"; sourceTree = "<group>"; };
+		DDA6C8BB284616B60083D71A /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		DDA6C8BE2846181D0083D71A /* ProfileElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileElements.swift; sourceTree = "<group>"; };
+		DDA6C8C128479CB40083D71A /* ProfileCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionCell.swift; sourceTree = "<group>"; };
+		DDA6C8C32847B5250083D71A /* EditingProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingProfileViewController.swift; sourceTree = "<group>"; };
+		DDA6C8C62847B5A60083D71A /* EditingProfileElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingProfileElements.swift; sourceTree = "<group>"; };
 		DDC5F89A282681D000A29890 /* CustomAlertReps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertReps.swift; sourceTree = "<group>"; };
 		DDC81E42283798A400674EBA /* CustomAlertTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTimer.swift; sourceTree = "<group>"; };
 		DDC858D2280924CA008B0EB4 /* UILabel + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extensions.swift"; sourceTree = "<group>"; };
@@ -166,6 +176,8 @@
 			children = (
 				DD408DFD27FDE7E700028D33 /* MainVC */,
 				DDD58362280873C8006F26CE /* StaticVC */,
+				DDA6C8BD284617F50083D71A /* ProfileVC */,
+				DDA6C8C52847B5830083D71A /* EditingProfile */,
 				DD86EF3C280DCF390035AB30 /* NewWorkoutVC */,
 				DD1D7E992811683900907AD3 /* StartWorkoutTimerVC */,
 				DD1D7E9428114A8100907AD3 /* StartWorkoutVC */,
@@ -183,6 +195,8 @@
 				DDC858DA280D7BA5008B0EB4 /* NewWorkoutViewController.swift */,
 				DD1D7E92281146DC00907AD3 /* StartWorkoutViewController.swift */,
 				DD1D7E97281167AA00907AD3 /* StartWorkoutTimerViewController.swift */,
+				DDA6C8BB284616B60083D71A /* ProfileViewController.swift */,
+				DDA6C8C32847B5250083D71A /* EditingProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -255,6 +269,31 @@
 				DDA42CD0281012DE00078D6B /* RealmManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		DDA6C8BD284617F50083D71A /* ProfileVC */ = {
+			isa = PBXGroup;
+			children = (
+				DDA6C8C028479C920083D71A /* Cell */,
+				DDA6C8BE2846181D0083D71A /* ProfileElements.swift */,
+			);
+			path = ProfileVC;
+			sourceTree = "<group>";
+		};
+		DDA6C8C028479C920083D71A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DDA6C8C128479CB40083D71A /* ProfileCollectionCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DDA6C8C52847B5830083D71A /* EditingProfile */ = {
+			isa = PBXGroup;
+			children = (
+				DDA6C8C62847B5A60083D71A /* EditingProfileElements.swift */,
+			);
+			path = EditingProfile;
 			sourceTree = "<group>";
 		};
 		DDD4CBD42816B076005C1FE7 /* Alerts */ = {
@@ -365,6 +404,7 @@
 				DD408DE927FC22BC00028D33 /* MainViewController.swift in Sources */,
 				DD1D7E9628114AE900907AD3 /* ExercicesSetsRepsView.swift in Sources */,
 				DDD4CBD62816B2B2005C1FE7 /* SimpleAlert.swift in Sources */,
+				DDA6C8C42847B5250083D71A /* EditingProfileViewController.swift in Sources */,
 				DD4E9BD02823C029009FA000 /* DifferenceWorkout.swift in Sources */,
 				DD48009228057BE200314DA6 /* CalendarCollectionCell.swift in Sources */,
 				DDC81E43283798A400674EBA /* CustomAlertTimer.swift in Sources */,
@@ -374,7 +414,9 @@
 				DD408DE527FC22BC00028D33 /* AppDelegate.swift in Sources */,
 				DDD5835F28070B95006F26CE /* UIStackView + Extensions.swift in Sources */,
 				DD86EF40280DCFBC0035AB30 /* RepsOrTimerView.swift in Sources */,
+				DDA6C8BC284616B60083D71A /* ProfileViewController.swift in Sources */,
 				DDA42CCE28100E6D00078D6B /* WorkoutModel.swift in Sources */,
+				DDA6C8C72847B5A60083D71A /* EditingProfileElements.swift in Sources */,
 				DD408E0527FED9AF00028D33 /* WhatWeather.swift in Sources */,
 				DDC858D728094508008B0EB4 /* UIColor + Extensions.swift in Sources */,
 				DDC858D3280924CA008B0EB4 /* UILabel + Extensions.swift in Sources */,
@@ -391,7 +433,9 @@
 				DD86EF3E280DCFAA0035AB30 /* DateAndRepeatView.swift in Sources */,
 				DDA6C8BA2844BCDC0083D71A /* Int + Extensions.swift in Sources */,
 				DD1D7E93281146DC00907AD3 /* StartWorkoutViewController.swift in Sources */,
+				DDA6C8BF2846181D0083D71A /* ProfileElements.swift in Sources */,
 				DDA42CD32810256A00078D6B /* Date + Extension.swift in Sources */,
+				DDA6C8C228479CB40083D71A /* ProfileCollectionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
