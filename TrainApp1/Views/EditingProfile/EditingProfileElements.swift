@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol EditingProfileElementsDelegate: AnyObject {
     func button_back_press()
     func button_save_press()
+    func button_add_photo()
 }
 
 class EditingProfileElements: UIView {
@@ -18,14 +20,29 @@ class EditingProfileElements: UIView {
     
     private let text_Profile = UILabel(text: "Изменить профиль", fontName: "Roboto-Medium", fontSize: 24, textColor: .specialDarkBlue, opacity: 1)
 
-    private let userImageView: UIImageView = {
+    var userImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        imageView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         imageView.layer.borderWidth = 5
         imageView.layer.borderColor = UIColor.quaternaryLabel.cgColor
+        imageView.image = UIImage(named: "cinema")
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 50
-        imageView.tintColor = .specialDarkBlue
+        return imageView
+    }()
+    
+    private let plusImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.tintColor = .white
+        imageView.image = UIImage(systemName: "plus.circle.fill")
+        imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .white
+        imageView.backgroundColor = .specialDarkBlue
+        imageView.layer.cornerRadius = 18
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -85,6 +102,7 @@ class EditingProfileElements: UIView {
         field.returnKeyType = .done
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
         field.leftViewMode = .always
+        field.keyboardType = .numberPad
         return field
     }()
     
@@ -102,6 +120,7 @@ class EditingProfileElements: UIView {
         field.returnKeyType = .done
         field.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: field.frame.height))
         field.leftViewMode = .always
+        field.keyboardType = .numberPad
         return field
     }()
     
@@ -129,12 +148,21 @@ class EditingProfileElements: UIView {
         return button
     }()
     
+    private let localRealm = try! Realm()
+    private var userArray: Results<UserModel>!
+    private var userModel = UserModel()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
         setConstrains()
         setDelegates()
         addTaps()
+        
+        userArray = localRealm.objects(UserModel.self)
+        
+        loadUserInfo()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -157,9 +185,42 @@ class EditingProfileElements: UIView {
         self.addSubview(textField_Weight)
         self.addSubview(saveButton)
         self.addSubview(backButton)
+        self.addSubview(plusImage)
+    }
+    
+    private func setModel() {
+        guard let userFirstName = textField_firstName.text else { return }
+        userModel.userFirstName = userFirstName
+        
+        guard let userLastName = textField_lastName.text else { return }
+        userModel.userLastName = userLastName
+        
+        guard let userHeight = textField_Height.text else { return }
+        userModel.userHeight = Int(userHeight) ?? 0
+        
+        guard let userWeight = textField_Weight.text else { return }
+        userModel.userWidth = Int(userWeight) ?? 0
+        
+        if userImageView.image == UIImage(systemName: "plus") {
+            userModel.userImg = nil
+        } else {
+            guard let imageData = userImageView.image?.pngData() else { return }
+            userModel.userImg = imageData
+        }
+    }
+    
+    private func saveModel() {
+        if userArray.isEmpty {
+            RealmManager.shared.saveUserModel(model: userModel)
+        } else {
+            RealmManager.shared.updateUserModel(model: userModel)
+        }
+        userModel = UserModel()
     }
     
     @objc private func funcButtonSave() {
+        setModel()
+        saveModel()
         delegate?.button_save_press()
     }
     
@@ -182,6 +243,27 @@ class EditingProfileElements: UIView {
         let swipeScreen = UISwipeGestureRecognizer(target: self, action: #selector(swipeHideKeyboard))
         swipeScreen.cancelsTouchesInView = false
         self.addGestureRecognizer(swipeScreen)
+        
+        let tapImageView = UITapGestureRecognizer(target: self, action: #selector(chooseThePhoto))
+        userImageView.isUserInteractionEnabled = true
+        userImageView.addGestureRecognizer(tapImageView)
+    }
+    
+    private func loadUserInfo() {
+        if !userArray.isEmpty {
+            textField_firstName.placeholder = userArray[0].userFirstName
+            textField_lastName.placeholder = userArray[0].userLastName
+            textField_Height.placeholder = String(userArray[0].userHeight)
+            textField_Weight.placeholder = String(userArray[0].userWidth)
+            
+            guard let data = userArray[0].userImg else { return }
+            guard let image = UIImage(data: data) else { return }
+            userImageView.image = image
+            userImageView.contentMode = .scaleAspectFit
+            userImageView.layer.borderWidth = 5
+            userImageView.layer.borderColor = UIColor.white.cgColor
+            
+        }
     }
     
     @objc private func hideKeyboard() {
@@ -192,13 +274,17 @@ class EditingProfileElements: UIView {
         self.endEditing(true)
     }
     
+    @objc private func chooseThePhoto() {
+        delegate?.button_add_photo()
+    }
+    
 }
 
 // MARK: - setContrains
 extension EditingProfileElements {
     private func setConstrains() {
         NSLayoutConstraint.activate([
-            text_Profile.topAnchor.constraint(equalTo: self.topAnchor, constant: 15),
+            text_Profile.topAnchor.constraint(equalTo: self.topAnchor, constant: 25),
             text_Profile.centerXAnchor.constraint(equalTo: self.centerXAnchor)
         ])
         
@@ -210,6 +296,13 @@ extension EditingProfileElements {
         ])
         
         NSLayoutConstraint.activate([
+            plusImage.centerXAnchor.constraint(equalTo: userImageView.centerXAnchor, constant: 29),
+            plusImage.centerYAnchor.constraint(equalTo: userImageView.centerYAnchor, constant: 28),
+            plusImage.heightAnchor.constraint(equalToConstant: 36),
+            plusImage.widthAnchor.constraint(equalToConstant: 36)
+        ])
+        
+        NSLayoutConstraint.activate([
             blueBlock.topAnchor.constraint(equalTo: userImageView.centerYAnchor),
             blueBlock.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             blueBlock.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
@@ -217,7 +310,7 @@ extension EditingProfileElements {
         ])
         
         NSLayoutConstraint.activate([
-            text_firstName.topAnchor.constraint(equalTo: blueBlock.bottomAnchor, constant: 25),
+            text_firstName.topAnchor.constraint(equalTo: blueBlock.bottomAnchor, constant: 40),
             text_firstName.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
         ])
         
@@ -265,14 +358,14 @@ extension EditingProfileElements {
         ])
         
         NSLayoutConstraint.activate([
-            saveButton.topAnchor.constraint(equalTo: textField_Weight.bottomAnchor, constant: 50),
+            saveButton.topAnchor.constraint(equalTo: textField_Weight.bottomAnchor, constant: 112),
             saveButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 85),
             saveButton.heightAnchor.constraint(equalToConstant: 50),
             saveButton.widthAnchor.constraint(equalToConstant: 150)
         ])
         
         NSLayoutConstraint.activate([
-            backButton.topAnchor.constraint(equalTo: textField_Weight.bottomAnchor, constant: 50),
+            backButton.topAnchor.constraint(equalTo: textField_Weight.bottomAnchor, constant: 112),
             backButton.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: -85),
             backButton.heightAnchor.constraint(equalToConstant: 50),
             backButton.widthAnchor.constraint(equalToConstant: 150)

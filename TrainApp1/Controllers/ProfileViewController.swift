@@ -6,14 +6,20 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ProfileViewController: UIViewController {
     
+    private let localRealm = try! Realm()
+    
+    private var resultWorkout = [ResultWorkout]()
+    private var userArray: Results<UserModel>!
+    
     private let proflieElements = ProfileElements()
+    
     
     private let trainingsCollection:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = 3
         layout.scrollDirection = .horizontal
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
@@ -23,15 +29,24 @@ class ProfileViewController: UIViewController {
         return collection
     }()
     
-    private let idTrainingsCollectionCell = "idTrainingsCollectionCell"
+    private var workoutArray: Results<WorkoutModel>!
     
-    private let text_Target = UILabel(text: "Цель: 20 тренировок", fontName: "Roboto-Medium", fontSize: 18, textColor: .specialDarkBlue, opacity: 1)
+    private let idTrainingsCollectionCell = "idTrainingsCollectionCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setConstrains()
         setDelegates()
+        userArray = localRealm.objects(UserModel.self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        resultWorkout = [ResultWorkout]()
+        getWorkoutGeneralCount()
+        trainingsCollection.reloadData()
+        loadUserInfo()
     }
     
     
@@ -40,7 +55,6 @@ class ProfileViewController: UIViewController {
         view.addSubview(proflieElements)
         view.addSubview(trainingsCollection)
         trainingsCollection.register(ProfileCollectionCell.self, forCellWithReuseIdentifier: idTrainingsCollectionCell)
-        view.addSubview(text_Target)
     }
     
     
@@ -48,6 +62,54 @@ class ProfileViewController: UIViewController {
         trainingsCollection.delegate = self
         trainingsCollection.dataSource = self
         proflieElements.delegate = self
+    }
+    
+    private func getWorkoutNames() -> [String] {
+        var namesArray = [String]()
+        workoutArray = localRealm.objects(WorkoutModel.self)
+        
+        for workoutModel in workoutArray {
+            if !namesArray.contains(workoutModel.workoutName) {
+                namesArray.append(workoutModel.workoutName)
+            }
+        }
+        
+        return namesArray
+    }
+    
+    private func getWorkoutGeneralCount() {
+        let dateEnd = Date().localDate()
+        let dateStart = Date().localDate().offsetDays(days: 7)
+        let namesArray = getWorkoutNames()
+        
+        for name in namesArray {
+            let predicateName = NSPredicate(format: "workoutName = '\(name)' AND workoutDate BETWEEN %@", [dateStart, dateEnd])
+            workoutArray = localRealm.objects(WorkoutModel.self).filter(predicateName).sorted(byKeyPath: "workoutName")
+            var result = 0
+            var image: Data?
+            workoutArray.forEach { model in
+                result += model.workoutReps * model.workoutSets
+                image = model.workoutImg
+            }
+            
+            let resultModel = ResultWorkout(name: name, result: result, imageData: image)
+            resultWorkout.append(resultModel)
+        }
+    }
+    
+    private func loadUserInfo() {
+        if !userArray.isEmpty {
+            proflieElements.text_Name.text = "\(userArray[0].userFirstName) \(userArray[0].userLastName)"
+            proflieElements.text_Height.text = "Рост: \(userArray[0].userHeight) см"
+            proflieElements.text_Weight.text = "Вес: \(userArray[0].userWidth) кг"
+            
+            guard let data = userArray[0].userImg else { return }
+            guard let image = UIImage(data: data) else { return }
+            proflieElements.userImageView.image = image
+            proflieElements.userImageView.contentMode = .scaleAspectFit
+            proflieElements.userImageView.layer.borderWidth = 5
+            proflieElements.userImageView.layer.borderColor = UIColor.white.cgColor
+        }
     }
 }
 
@@ -59,19 +121,14 @@ extension ProfileViewController {
             proflieElements.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
             proflieElements.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 5),
             proflieElements.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -5),
-            proflieElements.heightAnchor.constraint(equalToConstant: 260)
+            proflieElements.heightAnchor.constraint(equalToConstant: 320)
         ])
         
         NSLayoutConstraint.activate([
-            trainingsCollection.topAnchor.constraint(equalTo: proflieElements.bottomAnchor, constant: 25),
+            trainingsCollection.topAnchor.constraint(equalTo: proflieElements.bottomAnchor, constant: 50),
             trainingsCollection.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15),
             trainingsCollection.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -15),
             trainingsCollection.heightAnchor.constraint(equalToConstant: 280)
-        ])
-        
-        NSLayoutConstraint.activate([
-            text_Target.topAnchor.constraint(equalTo: trainingsCollection.bottomAnchor, constant: 20),
-            text_Target.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15)
         ])
     }
 }
@@ -79,13 +136,16 @@ extension ProfileViewController {
 // MARK: - ProfileViewController:UICollectionViewDataSource
 extension ProfileViewController:UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        7
+        resultWorkout.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: idTrainingsCollectionCell, for: indexPath) as? ProfileCollectionCell else {
             return UICollectionViewCell()
         }
+        let model = resultWorkout[indexPath.row]
+        cell.cellConfigure(model: model)
+        cell.backgroundColor = (indexPath.row % 4 == 0 || indexPath.row % 4 == 3 ? .specialDarkBlue : .specialRed)
         return cell
     }
 }
@@ -94,6 +154,10 @@ extension ProfileViewController:UICollectionViewDataSource {
 extension ProfileViewController:UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: trainingsCollection.frame.width / 2.2, height: trainingsCollection.frame.height / 2.2)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        5
     }
 }
 

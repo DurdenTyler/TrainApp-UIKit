@@ -46,4 +46,23 @@ class RealmManager {
             model.workoutStatus = bool
         }
 }
+    
+    func saveUserModel(model: UserModel) {
+        try! localRealm.write({
+            localRealm.add(model)
+        })
+    }
+    
+    func updateUserModel(model: UserModel) {
+        
+        let users = localRealm.objects(UserModel.self)
+        
+        try! localRealm.write({
+            users[0].userFirstName = model.userFirstName
+            users[0].userLastName = model.userLastName
+            users[0].userHeight = model.userHeight
+            users[0].userWidth = model.userWidth
+            users[0].userImg = model.userImg
+        })
+    }
 }

@@ -11,6 +11,7 @@
 		DD1D7E9628114AE900907AD3 /* ExercicesSetsRepsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1D7E9528114AE900907AD3 /* ExercicesSetsRepsView.swift */; };
 		DD1D7E98281167AA00907AD3 /* StartWorkoutTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1D7E97281167AA00907AD3 /* StartWorkoutTimerViewController.swift */; };
 		DD1D7E9B2811688D00907AD3 /* ExercicesSetsTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1D7E9A2811688D00907AD3 /* ExercicesSetsTimerView.swift */; };
+		DD3CC6BC284B6E7A000D947E /* ResultWorkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3CC6BB284B6E7A000D947E /* ResultWorkout.swift */; };
 		DD408DE527FC22BC00028D33 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD408DE427FC22BC00028D33 /* AppDelegate.swift */; };
 		DD408DE727FC22BC00028D33 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD408DE627FC22BC00028D33 /* SceneDelegate.swift */; };
 		DD408DE927FC22BC00028D33 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD408DE827FC22BC00028D33 /* MainViewController.swift */; };
@@ -37,6 +38,7 @@
 		DDA6C8C228479CB40083D71A /* ProfileCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA6C8C128479CB40083D71A /* ProfileCollectionCell.swift */; };
 		DDA6C8C42847B5250083D71A /* EditingProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA6C8C32847B5250083D71A /* EditingProfileViewController.swift */; };
 		DDA6C8C72847B5A60083D71A /* EditingProfileElements.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA6C8C62847B5A60083D71A /* EditingProfileElements.swift */; };
+		DDA6C8C9284A04680083D71A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDA6C8C8284A04680083D71A /* UserModel.swift */; };
 		DDC5F89B282681D000A29890 /* CustomAlertReps.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC5F89A282681D000A29890 /* CustomAlertReps.swift */; };
 		DDC81E43283798A400674EBA /* CustomAlertTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC81E42283798A400674EBA /* CustomAlertTimer.swift */; };
 		DDC858D3280924CA008B0EB4 /* UILabel + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC858D2280924CA008B0EB4 /* UILabel + Extensions.swift */; };
@@ -48,6 +50,15 @@
 		DDD5835F28070B95006F26CE /* UIStackView + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5835E28070B95006F26CE /* UIStackView + Extensions.swift */; };
 		DDD5836128086004006F26CE /* StaticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD5836028086004006F26CE /* StaticViewController.swift */; };
 		DDD58365280873F6006F26CE /* StaticTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD58364280873F6006F26CE /* StaticTableCell.swift */; };
+		DDEB83CC284BB3C200E18DE5 /* GallaryOrPhotoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB83CB284BB3C200E18DE5 /* GallaryOrPhotoAlert.swift */; };
+		DDEB83CE284DE86D00E18DE5 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB83CD284DE86D00E18DE5 /* Notifications.swift */; };
+		DDEB83D0285046E800E18DE5 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB83CF285046E800E18DE5 /* OnBoardingViewController.swift */; };
+		DDEB83D22850470800E18DE5 /* SlideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB83D12850470800E18DE5 /* SlideModel.swift */; };
+		DDEB83D628504D0C00E18DE5 /* OnBoardingViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB83D528504D0C00E18DE5 /* OnBoardingViewCell.swift */; };
+		DDEB83D92850966600E18DE5 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB83D82850966600E18DE5 /* NetworkRequest.swift */; };
+		DDEB83DB28509FAB00E18DE5 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB83DA28509FAB00E18DE5 /* WeatherModel.swift */; };
+		DDEB83DD285331F100E18DE5 /* NetworkDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB83DC285331F100E18DE5 /* NetworkDataFetch.swift */; };
+		DDEB83DF2853457600E18DE5 /* NetworkImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDEB83DE2853457600E18DE5 /* NetworkImageRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +66,7 @@
 		DD1D7E9528114AE900907AD3 /* ExercicesSetsRepsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercicesSetsRepsView.swift; sourceTree = "<group>"; };
 		DD1D7E97281167AA00907AD3 /* StartWorkoutTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutTimerViewController.swift; sourceTree = "<group>"; };
 		DD1D7E9A2811688D00907AD3 /* ExercicesSetsTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercicesSetsTimerView.swift; sourceTree = "<group>"; };
+		DD3CC6BB284B6E7A000D947E /* ResultWorkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultWorkout.swift; sourceTree = "<group>"; };
 		DD408DE127FC22BC00028D33 /* TrainApp1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrainApp1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD408DE427FC22BC00028D33 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD408DE627FC22BC00028D33 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +93,7 @@
 		DDA6C8C128479CB40083D71A /* ProfileCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionCell.swift; sourceTree = "<group>"; };
 		DDA6C8C32847B5250083D71A /* EditingProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingProfileViewController.swift; sourceTree = "<group>"; };
 		DDA6C8C62847B5A60083D71A /* EditingProfileElements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingProfileElements.swift; sourceTree = "<group>"; };
+		DDA6C8C8284A04680083D71A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		DDC5F89A282681D000A29890 /* CustomAlertReps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertReps.swift; sourceTree = "<group>"; };
 		DDC81E42283798A400674EBA /* CustomAlertTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTimer.swift; sourceTree = "<group>"; };
 		DDC858D2280924CA008B0EB4 /* UILabel + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extensions.swift"; sourceTree = "<group>"; };
@@ -92,6 +105,15 @@
 		DDD5835E28070B95006F26CE /* UIStackView + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + Extensions.swift"; sourceTree = "<group>"; };
 		DDD5836028086004006F26CE /* StaticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticViewController.swift; sourceTree = "<group>"; };
 		DDD58364280873F6006F26CE /* StaticTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticTableCell.swift; sourceTree = "<group>"; };
+		DDEB83CB284BB3C200E18DE5 /* GallaryOrPhotoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallaryOrPhotoAlert.swift; sourceTree = "<group>"; };
+		DDEB83CD284DE86D00E18DE5 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		DDEB83CF285046E800E18DE5 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		DDEB83D12850470800E18DE5 /* SlideModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideModel.swift; sourceTree = "<group>"; };
+		DDEB83D528504D0C00E18DE5 /* OnBoardingViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewCell.swift; sourceTree = "<group>"; };
+		DDEB83D82850966600E18DE5 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		DDEB83DA28509FAB00E18DE5 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		DDEB83DC285331F100E18DE5 /* NetworkDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetch.swift; sourceTree = "<group>"; };
+		DDEB83DE2853457600E18DE5 /* NetworkImageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkImageRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +169,7 @@
 				DD408DFA27FD7D2100028D33 /* Views */,
 				DD408DFB27FD7D2700028D33 /* Controllers */,
 				DDA42CCF281012AC00078D6B /* Services */,
+				DDEB83D72850964100E18DE5 /* Network */,
 				DD4800872804322000314DA6 /* Extensions */,
 				DD408DFC27FD7D6200028D33 /* Resourses */,
 			);
@@ -158,6 +181,7 @@
 			children = (
 				DD408DE427FC22BC00028D33 /* AppDelegate.swift */,
 				DD408DE627FC22BC00028D33 /* SceneDelegate.swift */,
+				DDEB83CD284DE86D00E18DE5 /* Notifications.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -167,6 +191,10 @@
 			children = (
 				DDA42CCD28100E6D00078D6B /* WorkoutModel.swift */,
 				DD4E9BCF2823C029009FA000 /* DifferenceWorkout.swift */,
+				DDA6C8C8284A04680083D71A /* UserModel.swift */,
+				DD3CC6BB284B6E7A000D947E /* ResultWorkout.swift */,
+				DDEB83D12850470800E18DE5 /* SlideModel.swift */,
+				DDEB83DA28509FAB00E18DE5 /* WeatherModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -174,13 +202,14 @@
 		DD408DFA27FD7D2100028D33 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DDEB83D328504CE300E18DE5 /* OnBoarding */,
 				DD408DFD27FDE7E700028D33 /* MainVC */,
 				DDD58362280873C8006F26CE /* StaticVC */,
-				DDA6C8BD284617F50083D71A /* ProfileVC */,
-				DDA6C8C52847B5830083D71A /* EditingProfile */,
 				DD86EF3C280DCF390035AB30 /* NewWorkoutVC */,
 				DD1D7E992811683900907AD3 /* StartWorkoutTimerVC */,
 				DD1D7E9428114A8100907AD3 /* StartWorkoutVC */,
+				DDA6C8BD284617F50083D71A /* ProfileVC */,
+				DDA6C8C52847B5830083D71A /* EditingProfile */,
 				DDD4CBD42816B076005C1FE7 /* Alerts */,
 			);
 			path = Views;
@@ -189,6 +218,7 @@
 		DD408DFB27FD7D2700028D33 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				DDEB83CF285046E800E18DE5 /* OnBoardingViewController.swift */,
 				DDC858D8280D6349008B0EB4 /* MainTabBarController.swift */,
 				DD408DE827FC22BC00028D33 /* MainViewController.swift */,
 				DDD5836028086004006F26CE /* StaticViewController.swift */,
@@ -302,6 +332,7 @@
 				DDD4CBD52816B2B2005C1FE7 /* SimpleAlert.swift */,
 				DDC5F89A282681D000A29890 /* CustomAlertReps.swift */,
 				DDC81E42283798A400674EBA /* CustomAlertTimer.swift */,
+				DDEB83CB284BB3C200E18DE5 /* GallaryOrPhotoAlert.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -320,6 +351,32 @@
 				DDD58364280873F6006F26CE /* StaticTableCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		DDEB83D328504CE300E18DE5 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				DDEB83D428504CED00E18DE5 /* Cell */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		DDEB83D428504CED00E18DE5 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DDEB83D528504D0C00E18DE5 /* OnBoardingViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		DDEB83D72850964100E18DE5 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				DDEB83D82850966600E18DE5 /* NetworkRequest.swift */,
+				DDEB83DC285331F100E18DE5 /* NetworkDataFetch.swift */,
+				DDEB83DE2853457600E18DE5 /* NetworkImageRequest.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,19 +462,26 @@
 				DD1D7E9628114AE900907AD3 /* ExercicesSetsRepsView.swift in Sources */,
 				DDD4CBD62816B2B2005C1FE7 /* SimpleAlert.swift in Sources */,
 				DDA6C8C42847B5250083D71A /* EditingProfileViewController.swift in Sources */,
+				DDEB83DD285331F100E18DE5 /* NetworkDataFetch.swift in Sources */,
 				DD4E9BD02823C029009FA000 /* DifferenceWorkout.swift in Sources */,
 				DD48009228057BE200314DA6 /* CalendarCollectionCell.swift in Sources */,
 				DDC81E43283798A400674EBA /* CustomAlertTimer.swift in Sources */,
 				DDC858D9280D6349008B0EB4 /* MainTabBarController.swift in Sources */,
 				DD1D7E9B2811688D00907AD3 /* ExercicesSetsTimerView.swift in Sources */,
+				DDEB83DF2853457600E18DE5 /* NetworkImageRequest.swift in Sources */,
 				DDD5836128086004006F26CE /* StaticViewController.swift in Sources */,
+				DDEB83DB28509FAB00E18DE5 /* WeatherModel.swift in Sources */,
 				DD408DE527FC22BC00028D33 /* AppDelegate.swift in Sources */,
 				DDD5835F28070B95006F26CE /* UIStackView + Extensions.swift in Sources */,
 				DD86EF40280DCFBC0035AB30 /* RepsOrTimerView.swift in Sources */,
 				DDA6C8BC284616B60083D71A /* ProfileViewController.swift in Sources */,
 				DDA42CCE28100E6D00078D6B /* WorkoutModel.swift in Sources */,
+				DDEB83D22850470800E18DE5 /* SlideModel.swift in Sources */,
+				DDEB83CC284BB3C200E18DE5 /* GallaryOrPhotoAlert.swift in Sources */,
 				DDA6C8C72847B5A60083D71A /* EditingProfileElements.swift in Sources */,
 				DD408E0527FED9AF00028D33 /* WhatWeather.swift in Sources */,
+				DDEB83CE284DE86D00E18DE5 /* Notifications.swift in Sources */,
+				DDEB83D0285046E800E18DE5 /* OnBoardingViewController.swift in Sources */,
 				DDC858D728094508008B0EB4 /* UIColor + Extensions.swift in Sources */,
 				DDC858D3280924CA008B0EB4 /* UILabel + Extensions.swift in Sources */,
 				DDC5F89B282681D000A29890 /* CustomAlertReps.swift in Sources */,
@@ -431,11 +495,15 @@
 				DDA42CD1281012DE00078D6B /* RealmManager.swift in Sources */,
 				DD408E0127FED43400028D33 /* AddWorkoutButton.swift in Sources */,
 				DD86EF3E280DCFAA0035AB30 /* DateAndRepeatView.swift in Sources */,
+				DD3CC6BC284B6E7A000D947E /* ResultWorkout.swift in Sources */,
 				DDA6C8BA2844BCDC0083D71A /* Int + Extensions.swift in Sources */,
 				DD1D7E93281146DC00907AD3 /* StartWorkoutViewController.swift in Sources */,
 				DDA6C8BF2846181D0083D71A /* ProfileElements.swift in Sources */,
 				DDA42CD32810256A00078D6B /* Date + Extension.swift in Sources */,
+				DDEB83D92850966600E18DE5 /* NetworkRequest.swift in Sources */,
+				DDA6C8C9284A04680083D71A /* UserModel.swift in Sources */,
 				DDA6C8C228479CB40083D71A /* ProfileCollectionCell.swift in Sources */,
+				DDEB83D628504D0C00E18DE5 /* OnBoardingViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

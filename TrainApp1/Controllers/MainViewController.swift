@@ -16,12 +16,15 @@ class MainViewController: UIViewController {
         imageView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         imageView.layer.borderWidth = 5
         imageView.layer.borderColor = UIColor.quaternaryLabel.cgColor
+        imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "cinema")
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
     private let workoutTodayLabel = UILabel(text: "Сегодняшняя тренировка", textColor: .specialDarkBlue, opacity: 0.7)
     
-    private let userNameLabel = UILabel(text: "Your Name", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
+    private let userNameLabel = UILabel(text: "Ваше Имя", fontName: "Roboto-Medium", fontSize: 20, textColor: .specialDarkBlue, opacity: 1)
     
     /// Создаем таблицу
     private let tableView:UITableView = {
@@ -35,17 +38,12 @@ class MainViewController: UIViewController {
         return table
     }()
     
-    private let noTrainingImageView:UIImageView = {
+    private let noTrainingImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "NoTraining")
-        imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "workout")
         return imageView
     }()
-    
-    private let noTrainigLabel = UILabel(text: "Нет тренировки", fontName: "Roboto-Medium", fontSize: 25, textColor: .specialDarkBlue, opacity: 1)
-    
-    private let pressPlusLabel = UILabel(text: "нажмите + что бы добавить", fontName: "Roboto-Medium", fontSize: 16, textColor: .specialDarkBlue, opacity: 1)
     
     /// Создаем идентификатор для ячейки таблицы
     private let idWorkoutTableViewCell = "idWorkoutTableViewCell"
@@ -58,6 +56,7 @@ class MainViewController: UIViewController {
     
     private let localRealm = try! Realm()
     private var workoutArray: Results<WorkoutModel>!
+    private var userArray: Results<UserModel>!
     
     
     
@@ -68,6 +67,7 @@ class MainViewController: UIViewController {
         super.viewDidLayoutSubviews()
         /// Здесь мы квадратный вью превращаем круг
         userImageView.layer.cornerRadius = userImageView.frame.width / 2
+        noTrainingImageView.layer.cornerRadius = noTrainingImageView.frame.width / 2
     }
     
     
@@ -76,19 +76,20 @@ class MainViewController: UIViewController {
         setupViews()
         setContrains()
         setDelegates()
+        userArray = localRealm.objects(UserModel.self)
+        getWather()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getWorkout(date: Date())
         tableView.reloadData()
+        loadUserInfo()
     }
     
     private func setupViews() {
         view.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         view.addSubview(noTrainingImageView)
-        view.addSubview(noTrainigLabel)
-        view.addSubview(pressPlusLabel)
         view.addSubview(whatWeather)
         view.addSubview(calendarView)
         view.addSubview(userImageView)
@@ -134,14 +135,43 @@ class MainViewController: UIViewController {
     private func checkWorkouts() {
         if workoutArray.count == 0 {
             noTrainingImageView.isHidden = false
-            noTrainigLabel.isHidden = false
-            pressPlusLabel.isHidden = false
             tableView.isHidden = true
+            workoutTodayLabel.text = "Никаких упражнений на сегодня нет"
         } else {
             noTrainingImageView.isHidden = true
-            noTrainigLabel.isHidden = true
-            pressPlusLabel.isHidden = true
             tableView.isHidden = false
+            workoutTodayLabel.text = "Сегодняшняя тренировка"
+        }
+    }
+    
+    private func loadUserInfo() {
+        if !userArray.isEmpty {
+            userNameLabel.text = "\(userArray[0].userFirstName) \(userArray[0].userLastName)"
+            guard let data = userArray[0].userImg else { return }
+            guard let image = UIImage(data: data) else { return }
+            userImageView.image = image
+            userImageView.contentMode = .scaleAspectFit
+            userImageView.layer.borderWidth = 5
+            userImageView.layer.borderColor = UIColor.white.cgColor
+        }
+    }
+    
+    private func getWather() {
+        // первое это мы получаем погоду
+        NetworkDataFetch.shared.fetchWeather { [weak self] result, error in
+            guard let self = self else { return }
+            if let model = result {
+                self.whatWeather.setWeather(model: model)
+                NetworkImageRequest.shared.requestData(id: model.weather[0].icon) { [weak self] result in
+                    guard let self = self else { return }
+                    switch result {
+                    case .success(let data):
+                        self.whatWeather.setWeatherImage(data: data)
+                    case .failure(let error):
+                        print("Error \(error.localizedDescription)")
+                    }
+                }
+            }
         }
     }
     
@@ -167,7 +197,7 @@ extension MainViewController {
         
         NSLayoutConstraint.activate([
             userNameLabel.bottomAnchor.constraint(equalTo: calendarView.topAnchor, constant: -10),
-            userNameLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 60),
+            userNameLabel.leadingAnchor.constraint(equalTo: userImageView.trailingAnchor, constant: 8),
             userNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
         ])
         
@@ -199,20 +229,10 @@ extension MainViewController {
         ])
         
         NSLayoutConstraint.activate([
-            noTrainingImageView.topAnchor.constraint(equalTo: workoutTodayLabel.bottomAnchor, constant: 10),
+            noTrainingImageView.topAnchor.constraint(equalTo: workoutTodayLabel.bottomAnchor, constant: 65),
             noTrainingImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
-            noTrainingImageView.heightAnchor.constraint(equalToConstant: 400),
-            noTrainingImageView.widthAnchor.constraint(equalToConstant: 350)
-        ])
-        
-        NSLayoutConstraint.activate([
-            noTrainigLabel.topAnchor.constraint(equalTo: noTrainingImageView.bottomAnchor, constant: 2),
-            noTrainigLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -80)
-        ])
-        
-        NSLayoutConstraint.activate([
-            pressPlusLabel.topAnchor.constraint(equalTo: noTrainigLabel.bottomAnchor, constant: 5),
-            pressPlusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 80)
+            noTrainingImageView.heightAnchor.constraint(equalToConstant: 300),
+            noTrainingImageView.widthAnchor.constraint(equalToConstant: 300)
         ])
         
     }

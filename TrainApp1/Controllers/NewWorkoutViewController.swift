@@ -30,6 +30,18 @@ class NewWorkoutViewController: UIViewController {
         return field
     }()
     
+    private let imgButton:UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .specialDarkBlue
+        button.backgroundColor = .specialYellow
+        button.setTitle("Изображение", for: .normal)
+        button.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 14)
+        button.layer.cornerRadius = 8
+        button.addTarget(self, action: #selector(imgFuncButton), for: .touchUpInside)
+        return button
+    }()
+    
     private let dateLabel = UILabel(text: "Дата и напоминание", fontSize: 12, textColor: .specialYellow, opacity: 0.7)
     
     private let dateAndRepeatView = DateAndRepeatView()
@@ -40,7 +52,7 @@ class NewWorkoutViewController: UIViewController {
     
     private var workoutModel = WorkoutModel()
     
-    private let testImage = UIImage(named: "testWorkout")
+    private var testImage = UIImage(named: "dumbbell")
     
     private let saveButton:UIButton = {
         let button = UIButton(type: .system)
@@ -79,6 +91,7 @@ class NewWorkoutViewController: UIViewController {
         view.backgroundColor = .specialDarkBlue
         view.addSubview(newWorkoutLabel)
         view.addSubview(nameLabel)
+        view.addSubview(imgButton)
         view.addSubview(dateLabel)
         view.addSubview(nameTextField)
         view.addSubview(dateAndRepeatView)
@@ -136,6 +149,8 @@ class NewWorkoutViewController: UIViewController {
         
         if textCount != 0 && (workoutModel.workoutReps != 0 || workoutModel.workoutTimer != 0) {
             RealmManager.shared.saveWorkoutModel(model: workoutModel)
+            createNotifications()
+            // Самое важное что нам нужно создать уведмлоние выше строки что ниже
             workoutModel = WorkoutModel()
             alertSimpleOK(title: "Успешно", message: nil)
             refreshObjects()
@@ -153,6 +168,23 @@ class NewWorkoutViewController: UIViewController {
         dateAndRepeatView.refreshDatepickerAndSwitch()
         repsOrTimer.refreshAllSlidersAndLabels()
         nameTextField.text = ""
+        testImage = UIImage(named: "dumbbell")
+    }
+    
+    private func createNotifications() {
+        // создаем уведомление
+        let notifications = Notifications()
+        // получаем строку нашей даты
+        let stringDate = workoutModel.workoutDate.ddMMyyyyFromDate()
+        // далее вызываю метод наше расписание
+        notifications.scheduleDateNotifications(date: workoutModel.workoutDate, id: "workout" + stringDate)
+    }
+    
+    @objc private func imgFuncButton() {
+        alertPhotoOrCamera { [weak self] source in
+            guard let self = self else { return }
+            self.chooseImagePicker(source: source)
+        }
     }
     
 }
@@ -173,8 +205,15 @@ extension NewWorkoutViewController {
         NSLayoutConstraint.activate([
             nameTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
             nameTextField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            nameTextField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            nameTextField.widthAnchor.constraint(equalToConstant: 220),
             nameTextField.heightAnchor.constraint(equalToConstant: 35)
+        ])
+        
+        NSLayoutConstraint.activate([
+            imgButton.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5),
+            imgButton.leadingAnchor.constraint(equalTo: nameTextField.trailingAnchor, constant: 10),
+            imgButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            imgButton.heightAnchor.constraint(equalToConstant: 35)
         ])
         
         NSLayoutConstraint.activate([
@@ -223,5 +262,29 @@ extension NewWorkoutViewController:UITextFieldDelegate {
     // этот метод срабатывает когда мы нажимаем на клавиатуре на готово
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         nameTextField.resignFirstResponder() // типо убираем с основного плана
+    }
+}
+
+
+// MARK: UIImagePickerControllerDelegate, UINavigationControllerDelegate
+extension NewWorkoutViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    // что будем выбирать, камеру или галлерею
+    func chooseImagePicker(source: UIImagePickerController.SourceType) {
+        if UIImagePickerController.isSourceTypeAvailable(source) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = true
+            imagePicker.sourceType = source
+            present(imagePicker, animated: true)
+        }
+    }
+    
+    // Этот метод срабатывает когда мы закрываем imagePicker
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.editedImage] as? UIImage
+        testImage = image
+        imgButton.setTitle("Изображение выбрано", for: .normal)
+        imgButton.titleLabel?.font = UIFont(name: "Roboto-Medium", size: 10)
+        dismiss(animated: true)
     }
 }

@@ -13,6 +13,15 @@ class StaticViewController: UIViewController {
     
     private let staticsLabel = UILabel(text: "Статистика", fontName: "Roboto-Medium", fontSize: 28, textColor: .specialDarkBlue, opacity: 1)
     
+    private let symbol_Question:UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.tintColor = .specialDarkBlue
+        button.setImage(UIImage(systemName: "person.fill.questionmark"), for: .normal )
+        button.addTarget(self, action: #selector(func_symbol_Quest), for: .touchUpInside)
+        return button
+    }()
+    
     private let segControl:UISegmentedControl = {
         let titles = ["Неделя", "Месяц"]
         let seg = UISegmentedControl(items: titles)
@@ -93,6 +102,7 @@ class StaticViewController: UIViewController {
         view.addSubview(exercicesLabel)
         view.addSubview(tableStaticView)
         view.addSubview(nameTextField)
+        view.addSubview(symbol_Question)
         tableStaticView.register(StaticTableCell.self, forCellReuseIdentifier: idStaticTableViewCell)
     }
     
@@ -151,7 +161,7 @@ class StaticViewController: UIViewController {
     }
     
     private func getDifferenceModel(dateStart: Date) {
-        let dateEnd = Date()
+        let dateEnd = Date().localDate()
         let namesArray = getWorkoutNames()
         
         for name in namesArray {
@@ -182,6 +192,10 @@ class StaticViewController: UIViewController {
         }
     }
     
+    @objc private func func_symbol_Quest() {
+        alertSimpleOK(title: "Статистика?", message: "Здесь вы можете увидеть прогресс или регресс количества повторений в упражнении")
+    }
+    
 }
 
 // MARK: - setContrains
@@ -190,6 +204,13 @@ extension StaticViewController {
         NSLayoutConstraint.activate([
             staticsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             staticsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            symbol_Question.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 2),
+            symbol_Question.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            symbol_Question.heightAnchor.constraint(equalToConstant: 50),
+            symbol_Question.widthAnchor.constraint(equalToConstant: 30)
         ])
         
         NSLayoutConstraint.activate([

@@ -19,7 +19,7 @@ class AddWorkoutButton:UIButton {
     private let addWorkoutLabel:UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Добавить тренировку"
+        label.text = "Добавить упражнение"
         label.font = UIFont(name: "Roboto-Medium", size: 11)
         label.textAlignment = .center
         label.numberOfLines = 2

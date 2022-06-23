@@ -10,13 +10,22 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var userDefault = UserDefaults.standard
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
+        let OnBoardingWasViewed = userDefault.object(forKey: "OnBoardingWasViewed") as? Bool ?? false
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = MainTabBarController()
+        
+        if OnBoardingWasViewed {
+            window?.rootViewController = MainTabBarController()
+        } else {
+            window?.rootViewController = OnBoardingViewController()
+        }
+        
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light /// как бы всегда будет светлая тема
     }
